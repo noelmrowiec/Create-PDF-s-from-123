@@ -4,7 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3cd366ae-0f7b-47c5-8891-4ae56705606e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>testing.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,8 +25,8 @@
   <ItemGroup>
     <Compile Include="DD1750_Creator.py" />
     <Compile Include="encrypt.py" />
-    <Compile Include="testDifferentPDF.py" />
     <Compile Include="testing.py" />
+    <Compile Include="testDifferentPDF.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="dd1750.pdf" />

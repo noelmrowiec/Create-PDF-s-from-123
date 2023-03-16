@@ -1,13 +1,19 @@
 from pypdf import PdfReader, PdfWriter
-import re                                   #import for regex for saving file
+import re                                   #import for regex for file name checks
+
+def contains_invalid_chars(s):
+    # Chars invalid for Windows file names
+    invalid_chars = '[<>:"/\\|?*]'
+    # Check if the string contains any of the invalid characters
+    return bool(re.search(invalid_chars, s))
 
 
 def get_save_as_filename():
     #returns todo
     #Prompts user for a output PDF file name 
-
-    regex = r"<>:\"\/\\\|?*"
     filename = input("Enter desired file name for output PDF: ")
+    if contains_invalid_chars(filename):
+        return
 
 reader = PdfReader("DD-Form-1750-Packing-List different version.pdf")
 writer = PdfWriter()
