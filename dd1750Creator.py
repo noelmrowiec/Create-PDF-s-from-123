@@ -63,8 +63,10 @@ inventory = get_inventory()
 #options: should have a deployable, or something like that, column for items to add to 1750
 #   but could ask user to enter in the sheet name to search, also the column number or names to add data to sheet
 
-num_items = num_items_to_print_1750(inventory)
 # get data from excel sheet
+items = get_items_to_print_to_1750(inventory)
+
+
 # should put all the items with the same 'common name' on the same line with the serial numbers
 # must check that it fits on one spot
 
