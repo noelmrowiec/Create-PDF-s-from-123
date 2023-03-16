@@ -1,8 +1,11 @@
 import unittest
 
-class Test_test_1(unittest.TestCase):
-    def test_A(self):
-        self.fail("Not implemented")
+from dd1750_creator import contains_invalid_chars
+
+class Test_filename(unittest.TestCase):
+    def new_method(self):
+        self.assertEqual(contains_invalid_chars("goodfile.@@"), False)
+       
 
 if __name__ == '__main__':
     unittest.main()

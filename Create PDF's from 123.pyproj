@@ -23,10 +23,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DD1750_Creator.py" />
+    <Compile Include="dd1750_creator.py" />
     <Compile Include="encrypt.py" />
     <Compile Include="testing.py" />
     <Compile Include="testDifferentPDF.py" />
+    <Compile Include="test_filename_check.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="dd1750.pdf" />

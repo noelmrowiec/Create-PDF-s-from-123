@@ -8,12 +8,14 @@ def contains_invalid_chars(s):
     return bool(re.search(invalid_chars, s))
 
 
-def get_save_as_filename():
+def is_valid_filename():
     #returns todo
     #Prompts user for a output PDF file name 
     filename = input("Enter desired file name for output PDF: ")
     if contains_invalid_chars(filename):
-        return
+        return False
+    else:
+        return True
 
 reader = PdfReader("DD-Form-1750-Packing-List different version.pdf")
 writer = PdfWriter()
