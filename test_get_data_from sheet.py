@@ -10,9 +10,12 @@ def something(inventory):
 
     #create new DataFrame by combining rows with same id values
     #https://www.statology.org/pandas-combine-rows-with-same-column-value/
+    #source https://stackoverflow.com/questions/33279940/how-to-combine-multiple-rows-of-strings-into-one-using-pandas
+    #https://pandas.pydata.org/
     #df_new = inventory.groupby('COMMON NAME')
     print(inventory.info())
-    df_new = inventory.groupby('COMMON NAME').aggregate({'SERIAL': lambda x: ', '.join(str(x))})
+    df_new = inventory.groupby('COMMON NAME').aggregate({'SERIAL': lambda x: ', '.join([str(i) for i in x]),
+    })
     
     print(df_new)
 
@@ -28,7 +31,7 @@ def something(inventory):
 
     
     df2 = df.groupby('category').agg({
-        'name': lambda x: ', '.join([str(i) for i in x]),
+        'name': lambda x: ', '.join([str(i) for i in x])
     })
     print(df2)
 
