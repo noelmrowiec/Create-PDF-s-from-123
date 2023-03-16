@@ -57,9 +57,13 @@ inventory = get_inventory()
 #   but could ask user to enter in the sheet name to search, also the column number or names to add data to sheet
 
 num_items = num_items_to_print_1750(inventory)
-for i in num_items:
-
 # get data from excel sheet
+# should put all the items with the same 'common name' on the same line with the serial numbers
+# must check that it fits on one spot
+
+
+    
+
 # ask  to output dd1750 or da-2062
 # translate the fields in the excel sheet to the 1750 or 2062 
 # sum the columns and put total in total_#
