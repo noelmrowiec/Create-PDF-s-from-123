@@ -3,7 +3,7 @@ import re                                   #import for regex for file name chec
 
 def contains_invalid_chars(s):
     # Chars invalid for Windows file names
-    invalid_chars = '[<>:"/\\|?*]'
+    invalid_chars = r"[<>\\:\"/|?*]+"
     # Check if the string contains any of the invalid characters
     return bool(re.search(invalid_chars, s))
 

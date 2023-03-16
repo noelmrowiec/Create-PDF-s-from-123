@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="dd1750_creator.py" />
+    <Compile Include="dd1750Creator.py" />
     <Compile Include="encrypt.py" />
     <Compile Include="testing.py" />
     <Compile Include="testDifferentPDF.py" />
