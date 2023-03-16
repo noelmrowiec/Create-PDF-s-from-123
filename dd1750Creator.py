@@ -31,7 +31,7 @@ while True:
     else:
         break       #found valid excel sheet
     
-print(inventory.head(2))
+print(inventory.head())
 
 # open file in try-except
 
