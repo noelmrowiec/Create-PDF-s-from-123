@@ -20,11 +20,10 @@ def is_valid_filename():
         return True
 
 # prompt user for input excel sheet file name
-inventory = pd.read_excel('123 Working 08july22.xlsx')
 while True:
     sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
     try:
-        #inventory = pd.read_excel(sheet_filename)
+        inventory = pd.read_excel(sheet_filename)
         
     except:
         print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
@@ -32,7 +31,7 @@ while True:
     else:
         break       #found valid excel sheet
     
-    print(inventory.head(2))
+print(inventory.head(2))
 
 # open file in try-except
 
