@@ -1,4 +1,6 @@
-from pypdf import PdfReader, PdfWriter
+from csv import excel_tab
+from pypdf import PdfReader, PdfWriter      
+import pandas as pd                         #for read excel sheets
 import re                                   #import for regex for file name checks
 
 def contains_invalid_chars(s):
@@ -18,7 +20,24 @@ def is_valid_filename():
         return True
 
 # prompt user for input excel sheet file name
+inventory = pd.read_excel('123 Working 08july22.xlsx')
+while True:
+    sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
+    try:
+        #inventory = pd.read_excel(sheet_filename)
+        
+    except:
+        print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
+        continue
+    else:
+        break       #found valid excel sheet
+    
+    print(inventory.head(2))
+
 # open file in try-except
+
+#options: should have a deployable, or something like that, column for items to add to 1750
+#   but could ask user to enter in the sheet name to search, also the column number or names to add data to sheet
 # get data from excel sheet
 # ask  to output dd1750 or da-2062
 # translate the fields in the excel sheet to the 1750 or 2062 

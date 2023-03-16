@@ -31,6 +31,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="123 Working 08july22.xlsx" />
     <Content Include="dd1750.pdf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
