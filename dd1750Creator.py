@@ -31,7 +31,10 @@ while True:
     else:
         break       #found valid excel sheet
     
-print(inventory.head())
+# excel sheet doesn't work with default 123. Must create a new one
+# added "PRINT DD-1750 column to the sheet
+    #if the column contains a 'x', print to dd-1750
+    #in order to get a good count, the other cells must be blank (NaN)
 
 # open file in try-except
 
