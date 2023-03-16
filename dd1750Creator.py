@@ -48,7 +48,10 @@ def num_items_to_print_1750(inventory):
         sys.exit()  
 
 def get_items_to_print_to_1750(inventory):
-    return NULL
+    # returns items from inventory that have the 'x' in the column to print the 1750
+    # todo right now, must be lower case 'x'. check for both
+    items_to_print = inventory[inventory['PRINT DD-1750'] == 'x']
+    return items_to_print
         
 # prompt user for input excel sheet file name
 inventory = get_inventory()
