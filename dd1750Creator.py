@@ -76,14 +76,14 @@ def combine_same_items(inventory):
     df_combined = inventory.groupby(['COMMON NAME'], as_index= False).aggregate({'SERIAL' : ', '.join})
     
     return df_combined
- ''' returns  a list with items formated for DD-1750
 
- '  items' : must be already combined DataFrame object
- '''
+''' returns  a list with items formated for DD-1750
+
+'  items' : must be already combined DataFrame object
+'''
 def format_for_1750(items):
     list_dd1750 = []
-    for line in items:
-        print("line =" + str(line))
+    
     return NULL
 
 # prompt user for input excel sheet file name

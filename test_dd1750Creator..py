@@ -2,7 +2,7 @@ from asyncio.windows_events import NULL
 import unittest
 import pandas as pd  
 
-from dd1750Creator import contains_invalid_chars ,is_valid_filename, get_items_to_print_to_1750, get_inventory, combine_same_items
+from dd1750Creator import (contains_invalid_chars, is_valid_filename, get_items_to_print_to_1750, get_inventory, combine_same_items, format_for_1750)
 
 class Test_dd1750Creator(unittest.TestCase):
     def test_contains_invalid_chars(self):
@@ -51,7 +51,15 @@ class Test_dd1750Creator(unittest.TestCase):
         expected_result = pd.DataFrame(data)
 
         self.assertEqual(str(items_to_print), str(expected_result))
-
+    
+    def test_format_for_1750(self):
+        inventory = get_inventory()
+        items = get_items_to_print_to_1750(inventory)
+        items_to_print = combine_same_items(items)
+        print(items_to_print.info())
+        for index, row in items_to_print.iterrows():
+            print(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
+        format_for_1750(items_to_print)
 
 if __name__ == '__main__':
     unittest.main()
