@@ -55,7 +55,9 @@ class Test_dd1750Creator(unittest.TestCase):
         inventory = get_inventory()
         items = get_items_to_print_to_1750(inventory)
         items_to_print = combine_same_items(items)
-        print(format_for_1750(items_to_print))
+        list_1750 = format_for_1750(items_to_print)
+        expected_output = ['Garmin GPS 401 S/n: 1LR061007, 1LR061161', 'Garmin GPS 601 S/n: 58A022747', 'MULTI CAM RUCK S/n: A0']
+        self.assertEqual(list_1750, expected_output)
 
 if __name__ == '__main__':
     unittest.main()
