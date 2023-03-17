@@ -14,34 +14,12 @@ def something(inventory):
     #https://pandas.pydata.org/
     #df_new = inventory.groupby('COMMON NAME')
     print(inventory.info())
-    df_new = inventory.groupby('COMMON NAME').aggregate({'SERIAL': lambda x: ', '.join([str(i) for i in x]),
+    # below groups items with the same common name the aggregates the serial number into one comma separted string with all of the serial number 
+    df_new = inventory.groupby('COMMON NAME').aggregate({
+        'SERIAL': lambda x: ', '.join([str(i) for i in x])
     })
     
     print(df_new)
-
-    df = pd.DataFrame({
-    'category': ['A'] * 2 + ['B'] * 2,
-    'name': [3331.0, '22', 'A3', 'B144'],
-    })
-
-    #df2 = df.groupby('category').agg({
-    #    'name': lambda x: ', '.join(str(x)),
-    #})
-    #print(df2)
-
-    
-    df2 = df.groupby('category').agg({
-        'name': lambda x: ', '.join([str(i) for i in x])
-    })
-    print(df2)
-
-    ## Create a dictionary to store the mapping functions for each category
-    #name_mapping = {'A': lambda x: ' '.join([str(i) for i in x]), 'B': lambda x: ' '.join([str(i) for i in x])}
-
-    ## Group the DataFrame by 'category' and apply the corresponding mapping function to each group
-    #df['name'] = df.groupby('category')['name'].apply(lambda x: name_mapping[x.name](x.tolist()))
-
-    #print(df)
     
 
 inventory = pd.read_excel('test 123.xlsx')
