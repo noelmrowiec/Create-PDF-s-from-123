@@ -31,7 +31,7 @@ class Test_dd1750Creator(unittest.TestCase):
         inventory = get_inventory()
         items = get_items_to_print_to_1750(inventory)
 
-        data={'LIN #': ['09065N','09065N','09065N','09065N','80506N'], 'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007','1LR061161','58A022747', 'A0'], 'PRINT DD-1750' : ['x','x','x','x']}
+        data={'LIN #': ['09065N','09065N','09065N','80506N'], 'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007','1LR061161','58A022747', 'A0'], 'PRINT DD-1750' : ['x','x','x','x']}
         expected_result = pd.DataFrame(data)
         #print('expected')
         #print(expected_result.info(verbose=True))
