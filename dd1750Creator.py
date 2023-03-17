@@ -112,7 +112,7 @@ reader = PdfReader("DD-Form-1750-Packing-List different version.pdf")
 writer = PdfWriter()
 
 
-print(reader.get_form_text_fields(True))
+#print(reader.get_form_text_fields(True))
 
 
 page = reader.pages[0]   # from https://pypdf.readthedocs.io/
