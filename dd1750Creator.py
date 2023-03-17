@@ -74,8 +74,6 @@ def combine_same_items(inventory):
     #    'SERIAL': lambda x: ', '.join([str(i) for i in x])
     #})
     df_combined = inventory.groupby(['COMMON NAME'], as_index= False).aggregate({'SERIAL' : ', '.join})
-
-    #df2 = df.groupby('category')['name'].apply(lambda x: ' '.join(str(i) for i in x)).reset_index()
     
     return df_combined
         

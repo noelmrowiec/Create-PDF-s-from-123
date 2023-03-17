@@ -33,10 +33,10 @@ class Test_dd1750Creator(unittest.TestCase):
 
         data={'LIN #': ['09065N','09065N','09065N','09065N','80506N'], 'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 401', 'Garmin GPS 601', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007','1LR061161','58A022747','58A022766', 'A0'], 'PRINT DD-1750' : ['x','x','x','x','x']}
         expected_result = pd.DataFrame(data)
-        print('expected')
-        print(expected_result.info(verbose=True))
-        print('inventory')
-        print(inventory.info(verbose=True))
+        #print('expected')
+        #print(expected_result.info(verbose=True))
+        #print('inventory')
+        #print(inventory.info(verbose=True))
         self.assertEqual(str(items.to_numpy()),str(expected_result.to_numpy()), "Not equal")
 
     def test_combine_same_items(self):
@@ -46,7 +46,8 @@ class Test_dd1750Creator(unittest.TestCase):
 
         data={'LIN #': ['09065N','09065N','80506N'], 'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007, 1LR061161','58A022747, 58A022766', 'A0']}
         expected_result = pd.DataFrame(data)
-
+        print('items to print')
+        print(items_to_print)
         #self.assertEqual(str(items_to_print), str(expected_result))
 
 
