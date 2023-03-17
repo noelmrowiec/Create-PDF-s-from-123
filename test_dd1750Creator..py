@@ -39,6 +39,9 @@ class Test_dd1750Creator(unittest.TestCase):
         #print(inventory.info(verbose=True))
         self.assertEqual(str(items.to_numpy()),str(expected_result.to_numpy()), "Not equal")
 
+    '''also tests get_inventory() and get_items_to_print_to_1750()
+    must use simple sheet test.xlsx
+    '''
     def test_combine_same_items(self):
         inventory = get_inventory()
         items = get_items_to_print_to_1750(inventory)
