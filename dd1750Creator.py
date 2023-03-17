@@ -36,6 +36,7 @@ def get_inventory():
         else:
             break       #found valid excel sheet
 
+
 def num_items_to_print_1750(inventory):
     try:
         num_of_items = inventory['PRINT DD-1750'].count()
@@ -47,6 +48,8 @@ def num_items_to_print_1750(inventory):
         print("Index Error")    #todo make more descriptive
         sys.exit()  
 
+''' returns: items to print to 1750 (that is, items with  a 'x' is the column)
+'''
 def get_items_to_print_to_1750(inventory):
     # returns items from inventory that have the 'x' in the column to print the 1750
     # todo right now, must be lower case 'x'. check for both
