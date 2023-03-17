@@ -82,9 +82,10 @@ def combine_same_items(inventory):
 '  items' : must be already combined DataFrame object
 '''
 def format_for_1750(items):
-    list_dd1750 = []
-    
-    return NULL
+    list_dd1750 = list()
+    for index, row in items.iterrows():
+        list_dd1750.append(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
+    return list_dd1750
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
