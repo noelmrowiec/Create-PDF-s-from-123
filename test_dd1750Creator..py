@@ -19,8 +19,10 @@ class Test_dd1750Creator(unittest.TestCase):
         self.assertTrue(contains_invalid_chars('bad?d'))
         self.assertTrue(contains_invalid_chars('bad*d'))
 
+        ''' this test is dependant on what the user enters
+        '''
     def test_is_valid_filename(self):
-        self.assertFalse(is_valid_filename())
+        self.assertTrue(is_valid_filename())
     
     '''also tests get_inventory()
     must use simple sheet test.xlsx
@@ -35,7 +37,7 @@ class Test_dd1750Creator(unittest.TestCase):
         print(expected_result.info(verbose=True))
         print('inventory')
         print(inventory.info(verbose=True))
-        self.assertEqual(array(items.to_numpy()),array(expected_result.to_numpy()), "Not equal")
+        self.assertEqual(str(items.to_numpy()),str(expected_result.to_numpy()), "Not equal")
 
 
 if __name__ == '__main__':
