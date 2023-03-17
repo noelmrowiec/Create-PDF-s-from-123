@@ -49,14 +49,15 @@ class Test_dd1750Creator(unittest.TestCase):
 
         data={'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007, 1LR061161','58A022747', 'A0']}
         expected_result = pd.DataFrame(data)
-
+        print("test here:")
+        for index, row in items_to_print.iterrows():
+            print(row)
         self.assertEqual(str(items_to_print), str(expected_result))
     
     def test_format_for_1750(self):
         inventory = get_inventory()
         items = get_items_to_print_to_1750(inventory)
         items_to_print = combine_same_items(items)
-        print(items_to_print.info())
         for index, row in items_to_print.iterrows():
             print(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
         format_for_1750(items_to_print)
