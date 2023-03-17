@@ -28,7 +28,7 @@ def get_inventory():
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
-            inventory = pd.read_excel('simple sheet test.xlsx') #todo change back to sheet_filename
+            inventory = pd.read_excel('simple sheet test.xlsx', dtype='string') #todo change back to sheet_filename # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
@@ -70,9 +70,12 @@ def combine_same_items(inventory):
     #https://pandas.pydata.org/
     #df_new = inventory.groupby('COMMON NAME')
     # below groups items with the same common name the aggregates the serial number into one comma separted string with all of the serial number 
-    df_combined = inventory.groupby('COMMON NAME').aggregate({
-        'SERIAL': lambda x: ', '.join([str(i) for i in x])
-    })
+    #df_combined = inventory.groupby('COMMON NAME').aggregate({
+    #    'SERIAL': lambda x: ', '.join([str(i) for i in x])
+    #})
+    df_combined = inventory.groupby(['COMMON NAME'], as_index= False).aggregate({'SERIAL' : ', '.join})
+
+    #df2 = df.groupby('category')['name'].apply(lambda x: ' '.join(str(i) for i in x)).reset_index()
     
     return df_combined
         
