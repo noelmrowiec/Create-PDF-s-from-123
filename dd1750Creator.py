@@ -69,7 +69,6 @@ def combine_same_items(inventory):
     #source https://stackoverflow.com/questions/33279940/how-to-combine-multiple-rows-of-strings-into-one-using-pandas
     #https://pandas.pydata.org/
     #df_new = inventory.groupby('COMMON NAME')
-    #print(inventory.info())
     # below groups items with the same common name the aggregates the serial number into one comma separted string with all of the serial number 
     df_combined = inventory.groupby('COMMON NAME').aggregate({
         'SERIAL': lambda x: ', '.join([str(i) for i in x])
