@@ -1,7 +1,7 @@
 import sys
 import pandas as pd    
 
-def something(inventory):
+def combine_same_items(inventory):
     #find all common names
     #combine serials 
     #either ouput or save
