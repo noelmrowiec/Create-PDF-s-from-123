@@ -28,7 +28,9 @@ def get_items_to_print_to_1750(inventory):
     # todo right now, must be lower case 'x'. check for both
     items_to_print = inventory[inventory['PRINT DD-1750'] == 'x']
     return items_to_print
-print(get_items_to_print_to_1750(inventory)
+pr = get_items_to_print_to_1750(inventory)
+with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+    print(pr)
 
 
 
