@@ -27,7 +27,8 @@ class Test_dd1750Creator(unittest.TestCase):
         inventory = get_inventory()
         items = get_items_to_print_to_1750(inventory)
 
-        expected_result = pd.DataFrame({})
+        expected_result = pd.DataFrame(data={'LIN #': [09065N,09065N,09065N,09065N,80506N], 'COMMON NAME' : 
+})
 
 if __name__ == '__main__':
     unittest.main()
