@@ -24,7 +24,7 @@
   <ItemGroup>
     <Compile Include="dd1750Creator.py" />
     <Compile Include="encrypt.py" />
-    <Compile Include="test_get_data_from sheet.py" />
+    <Compile Include="test_dd1750Creator.py" />
     <Compile Include="testDifferentPDF.py" />
     <Compile Include="test_filename_check.py">
       <SubType>Code</SubType>
