@@ -28,7 +28,7 @@ def get_inventory():
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
-            inventory = pd.read_excel(sheet_filename)
+            inventory = pd.read_excel('simple sheet test.xlsx') #todo change back to sheet_filename
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
