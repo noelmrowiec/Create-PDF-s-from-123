@@ -127,7 +127,7 @@ def number_of_items(item):
 
     return 1
 
-''' Returns: True is successful, otherwise False
+''' Returns: the fillable_fields_dict is successful, otherwise False
 fills the specified dict (properly formated) with the contents at the specified box number
 
 box_num: must be int
@@ -137,10 +137,10 @@ fillable_fields_dict: dict for the 1750 PDF
 def fill_box_field(box_num, contents, fillable_fields_dict):
     MAX_BOX_NUM = 18
     if(box_num <= MAX_BOX_NUM):
-        box = 'box_' + box_num
+        box = 'box_' + str(box_num)
         fillable_fields_dict[box] = contents
-        return True
-    return False
+
+    return fillable_fields_dict
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
