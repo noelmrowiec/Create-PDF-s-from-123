@@ -24,10 +24,12 @@ for item in items_list:
     split_index = 0
 
     while len(substring) > MAX_CHARS:
-        split_index = substring.rfind(',', 0, MAX_CHARS ) + 1     #add 1 to split after the comma
+        split_index = substring.rfind(',', 0, MAX_CHARS) + 1     #add 1 to split after the comma
         new_list.append(substring[:split_index].strip())      
         substring = substring[split_index:]
 
     new_list.append(substring.strip())
 
 print(new_list)
+
+['Garmin GPS 401 S/n: 1LR061007, 1LR061007,', '1LR061007, 1LR061007,1LR061161, 1LR061161,', '1LR061161, 1LR061161, 1LR061161, 1LR061161', 'Smae 343344535', 'ff', 'Garmin GPS 401 S/n: 1LR061007, 1LR061007,', '1LR061007, 1LR061007,1LR061161, 1LR061161,', '1LR061161, 1LR061161, 1LR061161, 1LR061161,3 ,', '4522 , 232, 1LR061007, 1LR061007, 1LR061007,', '1LR061007,1LR061161, 1LR061161, 1LR061161,', '1LR061161, 1LR061161, 1LR061161,', 'lass s/n: 4']

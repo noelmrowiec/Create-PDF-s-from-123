@@ -91,7 +91,7 @@ def format_for_1750(items):
 
 items: must a list of strings
 '''
-def chunk_items(items_list):
+def char_limit_items(items_list):
     new_list = []
 
     for item in items_list:
