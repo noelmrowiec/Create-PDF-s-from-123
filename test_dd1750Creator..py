@@ -2,7 +2,7 @@ from asyncio.windows_events import NULL
 import unittest
 import pandas as pd  
 
-from dd1750Creator import (contains_invalid_chars, is_valid_filename, get_items_to_print_to_1750, get_inventory, combine_same_items, format_for_1750, char_limit_items)
+from dd1750Creator import (contains_invalid_chars, is_valid_filename, get_items_to_print_to_1750, get_inventory, combine_same_items, format_for_1750, char_limit_items, number_of_items)
 
 class Test_dd1750Creator(unittest.TestCase):
     def test_contains_invalid_chars(self):
@@ -66,6 +66,16 @@ class Test_dd1750Creator(unittest.TestCase):
         result = char_limit_items(test_data)
         self.assertEqual(result, expected_result)
     
+    def test_number_of_items(self):
+        data = ['Garmin GPS 401 S/n: 1LR061007, 1LR061161', 'Garmin GPS 601 S/n: 58A022747, 1LR061007, 1LR061161', 'MULTI CAM RUCK S/n: A0']
+        res = number_of_items(data[0])
+        self.assertEqual(res, 2)
+        res = number_of_items(data[1])
+        self.assertEqual(res, 3)
+        res = number_of_items(data[2])
+        self.assertEqual(res, 1)
+        res = number_of_items('no serials')
+        self.assertEqual(res, 1)
 
          
 if __name__ == '__main__':
