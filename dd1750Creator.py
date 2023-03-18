@@ -87,6 +87,13 @@ def format_for_1750(items):
         list_dd1750.append(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
     return list_dd1750
 
+''' returns: a list of items limited to 70 characters per item.
+
+items: must already be formated for PDF 
+'''
+def limit_items_to_70_chars(items):
+
+
 # prompt user for input excel sheet file name
 inventory = get_inventory()
 # excel sheet doesn't work with default 123. Must create a new one
@@ -103,7 +110,9 @@ items = get_items_to_print_to_1750(inventory)
 
 # should put all the items with the same 'common name' on the same line with the serial numbers
 items = combine_same_items(items)
-# format the combined data for the 1750
+
+items = format_for_1750(items)
+
 # must check that it fits on one spot
 
 
