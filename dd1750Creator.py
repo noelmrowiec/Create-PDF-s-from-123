@@ -89,10 +89,17 @@ def format_for_1750(items):
 
 ''' returns: a list of items limited to 70 characters per item.
 
-items: must already be formated for PDF 
+items: must a list of strings
 '''
-def limit_items_to_70_chars(items):
+def chunk_items_to_70_chars(items):
+    CHAR_LIMIT = 70
+    char_limited_items = []
+    for line in items:
+        """Produce `CHAR_LIMIT`-character chunks from `line`."""
+        for i in range(0, len(line), CHAR_LIMIT):
+            char_limited_items.append(line[i:i+CHAR_LIMIT])
 
+    return char_limited_items
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
