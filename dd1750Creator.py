@@ -129,7 +129,7 @@ def number_of_items(item):
 
 '''
 '''
-def fill_field(field_selection, num, contents, fillable_fields_dict):
+def select_field(field_selection, num, contents, fillable_fields_dict):
     if 'box' in field_selection:
         fill_box_field(num, contents, fillable_fields_dict)
     elif 'contents' in field_selection:
@@ -143,33 +143,14 @@ def fill_field(field_selection, num, contents, fillable_fields_dict):
     elif 'total' in field_selection:
         fill_total_field(num, contents, fillable_fields_dict)
 
-''' Returns: the fillable_fields_dict
-fills the specified dict (properly formated) with the contents at the specified box number
 
-box_num: must be int
-contents: string with item and serials
-fillable_fields_dict: dict for the 1750 PDF
+''' returns: a fillable_fields_dict with the specified field containing the contents
 '''
-def fill_box_field(box_num, contents, fillable_fields_dict):
-    MAX_BOX_NUM = 18
-    if(box_num <= MAX_BOX_NUM):
-        box = 'box_' + str(box_num)
-        fillable_fields_dict[box] = contents
-
-    return fillable_fields_dict
-
-''' Returns: the fillable_fields_dict
-fills the specified dict (properly formated) with the contents at the specified box number
-
-box_num: must be int
-contents: string with item and serials
-fillable_fields_dict: dict for the 1750 PDF
-'''
-def fill_contents_field(box_num, contents, fillable_fields_dict):
-    MAX_BOX_NUM = 18
-    if(box_num <= MAX_BOX_NUM):
-        box = 'box_' + str(box_num)
-        fillable_fields_dict[box] = contents
+def fill_field(field_selection, num, contents, fillable_fields_dict):
+    MAX_NUM = 18    #todo maybe not all the same
+    if(num <= MAX_NUM):
+        field = field_selection + str(num)
+        fillable_fields_dict[field] = contents
 
     return fillable_fields_dict
 
