@@ -81,6 +81,7 @@ def combine_same_items(inventory):
 
 '  items' : must be already combined DataFrame object
 '''
+#todo check if there is no serial number 
 def format_for_1750(items):
     list_dd1750 = list()
     for index, row in items.iterrows():
@@ -100,13 +101,31 @@ def char_limit_items(items_list):
         split_index = 0
 
         while len(substring) > MAX_CHARS:
-            split_index = substring.rfind(',', 0, MAX_CHARS) + 1     #add 1 to split after the comma
+            #todo -1 means it is not found. account for this 
+            split_index = substring.rindex(',', 0, MAX_CHARS) + 1     #add 1 to split after the comma
             new_list.append(substring[:split_index].strip())      
             substring = substring[split_index:]
 
         new_list.append(substring.strip())
 
     return new_list
+
+''' returns: number of items for that object. Returns 1 if no serial numbers
+
+Function with search a string (from the end) for 'S/n' and count all the serial numbers after it for the total count. If there is no 'S/n', the total count will be 1, otherwise the total count will be the number of serial numbers which are separted by commas. Case matters. 
+
+item: must be all items for that item. Should not be split over lines or will get bad result. Must be combined and formatted with 'S/n'
+'''
+def number_of_items(item):
+    #todo assume that all have serial number. Need to change this
+    start_index = item.rfind('S/n')
+    if(start_index != -1):
+        #'S/n' is in the string
+        start_index += 3    #start index after 'S/n'
+        serial_nums = item.split(',')
+        return len(serial_nums)
+
+    return 1
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()

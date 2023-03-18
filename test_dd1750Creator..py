@@ -47,9 +47,6 @@ class Test_dd1750Creator(unittest.TestCase):
         data={'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007, 1LR061161','58A022747', 'A0']}
         expected_result = pd.DataFrame(data)
         self.assertEqual(str(items_to_print), str(expected_result))
-
-        print("look here")
-        print(items_to_print)
     
     def test_format_for_1750(self):
         inventory = get_inventory()
@@ -68,7 +65,7 @@ class Test_dd1750Creator(unittest.TestCase):
 
         result = char_limit_items(test_data)
         self.assertEqual(result, expected_result)
-
+    
 
          
 if __name__ == '__main__':
