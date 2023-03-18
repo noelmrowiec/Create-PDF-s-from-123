@@ -87,7 +87,7 @@ def format_for_1750(items):
         list_dd1750.append(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
     return list_dd1750
 
-''' returns: a list of items limited to 70 characters per item.
+''' returns: a list of items limited to MAX_CHARS characters per item.
 
 items: must a list of strings
 '''
@@ -95,7 +95,7 @@ def char_limit_items(items_list):
     new_list = []
 
     for item in items_list:
-        MAX_CHARS = 50
+        MAX_CHARS = 50      #todo maybe move?
         substring = item      
         split_index = 0
 

@@ -2,7 +2,7 @@ from asyncio.windows_events import NULL
 import unittest
 import pandas as pd  
 
-from dd1750Creator import (contains_invalid_chars, is_valid_filename, get_items_to_print_to_1750, get_inventory, combine_same_items, format_for_1750)
+from dd1750Creator import (contains_invalid_chars, is_valid_filename, get_items_to_print_to_1750, get_inventory, combine_same_items, format_for_1750, char_limit_items)
 
 class Test_dd1750Creator(unittest.TestCase):
     def test_contains_invalid_chars(self):
@@ -59,7 +59,20 @@ class Test_dd1750Creator(unittest.TestCase):
         expected_output = ['Garmin GPS 401 S/n: 1LR061007, 1LR061161', 'Garmin GPS 601 S/n: 58A022747', 'MULTI CAM RUCK S/n: A0']
         self.assertEqual(list_1750, expected_output)
 
-    def test_chunk_items_to_70_chars(self):
-        test_data = ['garmin 23,', '123, 444,', '777777777,', '22,', '345']
+    def test_char_limit_items(self):
+        s = 'Garmin GPS 401 S/n: 1LR061007, 1LR061007, 1LR061007, 1LR061007,\
+            1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161'
+        s2 = 'Garmin GPS 401 S/n: 1LR061007, 1LR061007, 1LR061007, 1LR061007,\
+            1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161,3 ,4522 , 232, 1LR061007, 1LR061007, 1LR061007, 1LR061007,\
+            1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161,'
+        test_data = [s, 'Smae 343344535', 'ff', s2, 'lass s/n: 4']
+
+        expected_result = ['Garmin GPS 401 S/n: 1LR061007, 1LR061007, 1LR061007, 1LR061007, 1LR061161, 1LR061161, 1LR061161', '1LR061161, 1LR061161, 1LR061161','Smae 343344535', 'ff', 'Garmin GPS 401 S/n: 1LR061007, 1LR061007, 1LR061007, 1LR061007, 1LR061161, 1LR061161, 1LR061161', '1LR061161, 1LR061161, 1LR061161,3 ,4522 , 232, 1LR061007, 1LR061007, 1LR061007, 1LR061007', '1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161', 'lass s/n: 4']
+
+        result = char_limit_items(test_data)
+        self.assertEqual(result, expected_result)
+
+
+         
 if __name__ == '__main__':
     unittest.main()
