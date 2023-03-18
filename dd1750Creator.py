@@ -127,6 +127,22 @@ def number_of_items(item):
 
     return 1
 
+'''
+'''
+def fill_field(field_selection, num, contents, fillable_fields_dict):
+    if 'box' in field_selection:
+        fill_box_field(num, contents, fillable_fields_dict)
+    elif 'contents' in field_selection:
+        fill_contents_field(num, contents, fillable_fields_dict)
+    elif 'unit' in field_selection:
+        fill_unit_field(num, contents, fillable_fields_dict)
+    elif 'init' in field_selection:
+        fill_init_field(num, contents, fillable_fields_dict)
+    elif 'spares' in field_selection:
+        fill_spares_field(num, contents, fillable_fields_dict)
+    elif 'total' in field_selection:
+        fill_total_field(num, contents, fillable_fields_dict)
+
 ''' Returns: the fillable_fields_dict
 fills the specified dict (properly formated) with the contents at the specified box number
 
@@ -149,7 +165,7 @@ box_num: must be int
 contents: string with item and serials
 fillable_fields_dict: dict for the 1750 PDF
 '''
-def fill_box_field(box_num, contents, fillable_fields_dict):
+def fill_contents_field(box_num, contents, fillable_fields_dict):
     MAX_BOX_NUM = 18
     if(box_num <= MAX_BOX_NUM):
         box = 'box_' + str(box_num)
