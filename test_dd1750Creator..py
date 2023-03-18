@@ -59,5 +59,7 @@ class Test_dd1750Creator(unittest.TestCase):
         expected_output = ['Garmin GPS 401 S/n: 1LR061007, 1LR061161', 'Garmin GPS 601 S/n: 58A022747', 'MULTI CAM RUCK S/n: A0']
         self.assertEqual(list_1750, expected_output)
 
+    def test_chunk_items_to_70_chars(self):
+        test_data = ['garmin 23,', '123, 444,', '777777777,', '22,', '345']
 if __name__ == '__main__':
     unittest.main()

@@ -91,15 +91,22 @@ def format_for_1750(items):
 
 items: must a list of strings
 '''
-def chunk_items_to_70_chars(items):
-    CHAR_LIMIT = 70
-    char_limited_items = []
-    for line in items:
-        """Produce `CHAR_LIMIT`-character chunks from `line`."""
-        for i in range(0, len(line), CHAR_LIMIT):
-            char_limited_items.append(line[i:i+CHAR_LIMIT])
+def chunk_items(items_list):
+    new_list = []
 
-    return char_limited_items
+    for item in items_list:
+        MAX_CHARS = 50
+        substring = item      
+        split_index = 0
+
+        while len(substring) > MAX_CHARS:
+            split_index = substring.rfind(',', 0, MAX_CHARS) + 1     #add 1 to split after the comma
+            new_list.append(substring[:split_index].strip())      
+            substring = substring[split_index:]
+
+        new_list.append(substring.strip())
+
+    return new_list
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()

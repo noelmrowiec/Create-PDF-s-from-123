@@ -2,31 +2,32 @@ from operator import index
 import random
 import sys
 from time import process_time_ns
+from tracemalloc import start
 import pandas as pd    
 
-items_or = ['aaaaaaaaaaaa', 'ffffffffffffff', 'ggggggggggggggg','hhh', 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj','kkkkkkkkk' ]
+items = ['aaaaaaaaaaaa', 'ffffffffffffff', 'ggggggggggggggg','hhh', 'garmin 234, 234234234, 234255235253535, 55555555555555555555555555555555555555555555555, 4444, 45334, 2232323, 4333','kkkkkkkkk' ]
 
-items = []
-for i in range (1000000):
-    items.append('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-n = 12
-newList=  []
-start_a = process_time_ns()
-for line in items:
 
-    if len(line)> 12:
-        """Produce `n`-character chunks from `line`."""
-        for i in range(0, len(line), n):
-            newList.append(line[i:i+n])
-    else:
-        newList.append(line)
-stop_a = process_time_ns()
-print('time a')
-print(stop_a - start_a)
 
-newListb=  []
-start_b = process_time_ns()
+s = 'Garmin GPS 401 S/n: 1LR061007, 1LR061007, 1LR061007, 1LR061007,\
+1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161'
+s2 = 'Garmin GPS 401 S/n: 1LR061007, 1LR061007, 1LR061007, 1LR061007,\
+1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161,3 ,4522 , 232, 1LR061007, 1LR061007, 1LR061007, 1LR061007,\
+1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161, 1LR061161,'
+items_list = [s, 'Smae 343344535', 'ff', s2, 'lass s/n: 4']
 
-stop_b = process_time_ns()
-print('time b')
-print(stop_b - start_b)
+new_list = []
+
+for item in items_list:
+    MAX_CHARS = 50
+    substring = item      
+    split_index = 0
+
+    while len(substring) > MAX_CHARS:
+        split_index = substring.rfind(',', 0, MAX_CHARS ) + 1     #add 1 to split after the comma
+        new_list.append(substring[:split_index].strip())      
+        substring = substring[split_index:]
+
+    new_list.append(substring.strip())
+
+print(new_list)
