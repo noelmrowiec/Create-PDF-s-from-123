@@ -114,7 +114,7 @@ def char_limit_items(items_list):
 
 Function with search a string (from the end) for 'S/n' and count all the serial numbers after it for the total count. If there is no 'S/n', the total count will be 1, otherwise the total count will be the number of serial numbers which are separted by commas. Case matters. 
 
-item: must be all items for that item. Should not be split over lines or will get bad result. Must be combined and formatted with 'S/n'
+item: must be all items for that item. Should not be split over lines or will get bad result. Must be combined and formatted with 'S/n'. Example: 'Garmin GPS 401 S/n: 1LR061007, 1LR061161' will return 2
 '''
 def number_of_items(item):
     #todo assume that all have serial number. Need to change this
@@ -126,6 +126,9 @@ def number_of_items(item):
         return len(serial_nums)
 
     return 1
+
+def fill_box_field(string, box_num):
+
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
@@ -142,14 +145,15 @@ items = get_items_to_print_to_1750(inventory)
 
 
 # should put all the items with the same 'common name' on the same line with the serial numbers
-items = combine_same_items(items)
+items_combined = combine_same_items(items)
 
-items = format_for_1750(items)
+items = format_for_1750(items_combined)
 
 items = char_limit_items(items)
 
 #for each item in items 
 #add to contents field while there is space
+
 #if not, make new page
 
 
