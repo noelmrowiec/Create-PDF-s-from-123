@@ -127,7 +127,22 @@ def number_of_items(item):
 
     return 1
 
-''' Returns: the fillable_fields_dict is successful, otherwise False
+''' Returns: the fillable_fields_dict
+fills the specified dict (properly formated) with the contents at the specified box number
+
+box_num: must be int
+contents: string with item and serials
+fillable_fields_dict: dict for the 1750 PDF
+'''
+def fill_box_field(box_num, contents, fillable_fields_dict):
+    MAX_BOX_NUM = 18
+    if(box_num <= MAX_BOX_NUM):
+        box = 'box_' + str(box_num)
+        fillable_fields_dict[box] = contents
+
+    return fillable_fields_dict
+
+''' Returns: the fillable_fields_dict
 fills the specified dict (properly formated) with the contents at the specified box number
 
 box_num: must be int

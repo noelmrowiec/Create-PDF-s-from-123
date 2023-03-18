@@ -94,6 +94,7 @@ class Test_dd1750Creator(unittest.TestCase):
 
         res_dict = fill_box_field(19, "PC s/n 234324", fillable_fields_dict)
         self.assertEqual(res_dict, expected_dict)
+        print(res_dict)
 
 
          
