@@ -36,7 +36,7 @@ def get_inventory():
         else:
             break       #found valid excel sheet
 
-
+# todo probably remove
 def num_items_to_print_1750(inventory):
     try:
         num_of_items = inventory['PRINT DD-1750'].count()
@@ -127,7 +127,11 @@ items = combine_same_items(items)
 
 items = format_for_1750(items)
 
-# must check that it fits on one spot
+items = char_limit_items(items)
+
+#for each item in items 
+#add to contents field while there is space
+#if not, make new page
 
 
 #add the data to the dict below which will print to the DD-1750
