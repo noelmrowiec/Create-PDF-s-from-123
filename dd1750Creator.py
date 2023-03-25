@@ -1,3 +1,11 @@
+'''
+1750 Creator
+author: Noel Mrowiec
+
+Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spredsheet). Requirements: use included DD-1750 PDF because it is unprotected and specific field names are use by the program to fillout the PDF. Additionally, the 123 excel spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items and 'PRINT TO DD-1750'    
+'''
+
+
 from asyncio.windows_events import NULL
 from csv import excel_tab
 import sys
