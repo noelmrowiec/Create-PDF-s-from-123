@@ -1,3 +1,4 @@
+intro =
 '''
 1750 Creator
 author: Noel Mrowiec
@@ -11,8 +12,15 @@ the 'PRINT TO DD-1750' column. The name as serial number of the selected items (
 will be added to the DD-1750 PDF. Additionally, if there are repeated items, meaning items with the 
 same common name, they will be combined on the PDF and the total number of that item will be shown in 
 the total's column. 
-Currently, just use the 'simple sheet test.xlsx' because it includes the proper formating and the coulmn to select a print. 
+Current version limitations:
+-Only use the 'simple sheet test.xlsx' because it includes the proper formating and the coulmn 
+to select a print. 
+-Currently, only placing the item name in the correct box with the item's serial numbers and total 
+count of each item functions as expected. 
+-The user cannot name the output file. Currently, it is given the name DD-Form-1750-Packing-List filled.pdf
+ and the source PDF filled-out.pdf must be in the same file as the program. 
 
+More features to follow. 
 '''
 
 
@@ -31,7 +39,7 @@ def contains_invalid_chars(s):
 
 
 def is_valid_filename():
-    #returns todo
+    #returns True if valid filename, otherwise false. 
     #Prompts user for a output PDF file name 
     filename = input("Enter desired file name for output PDF: ")
     if contains_invalid_chars(filename):
