@@ -61,7 +61,7 @@ def get_inventory():
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
-            inventory = pd.read_excel(sheet_filename, dtype='string') #todo change back to sheet_filename # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
+            inventory = pd.read_excel(sheet_filename, dtype='string') # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
