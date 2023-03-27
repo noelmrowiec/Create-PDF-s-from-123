@@ -31,7 +31,11 @@ from pypdf import PdfReader, PdfWriter
 import pandas as pd                         #for read excel sheets
 import re                                   #import for regex for file name checks
 
+
 def contains_invalid_chars(s):
+    ''' returns: True if 's' contains invalid chars for Windows filename 
+    otherwise, False
+    '''
     # Chars invalid for Windows file names
     invalid_chars = r"[<>\\:\"/|?*]+"
     # Check if the string contains any of the invalid characters
@@ -40,17 +44,18 @@ def contains_invalid_chars(s):
 
 def is_valid_filename():
     #returns True if valid filename, otherwise false. 
-    #Prompts user for a output PDF file name 
+    #Prompts user for a output PDF file name
     filename = input("Enter desired file name for output PDF: ")
     if contains_invalid_chars(filename):
         return False
     else:
         return True
 
-''' returns: a DataFrame object (from the pandas library) containing the information from the first page.
-Prompts user to enter file name of 123 excel sheet. Waits until valid file name entered.
-'''
+
 def get_inventory():
+    ''' returns: a DataFrame object (from the pandas library) containing the information from the first page.
+    Prompts user to enter file name of 123 excel sheet. Waits until valid file name entered.
+    '''
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
@@ -64,6 +69,9 @@ def get_inventory():
 
 # todo probably remove
 def num_items_to_print_1750(inventory):
+    ''' Gets total number of items before combining. 
+    Currently, no use for function. 
+    ''' 
     try:
         num_of_items = inventory['PRINT DD-1750'].count()
         return num_of_items
@@ -74,17 +82,19 @@ def num_items_to_print_1750(inventory):
         print("Index Error")    #todo make more descriptive
         sys.exit()  
 
-''' returns: items to print to 1750 (that is, items with  a 'x' is the column)
-'''
+
 def get_items_to_print_to_1750(inventory):
-    # returns items from inventory that have the 'x' in the column to print the 1750
+    ''' returns: items to print to 1750 (that is, items with  a 'x' is the column)
+     items from inventory that have the 'x' in the column to print the 1750
+    '''
     # todo right now, must be lower case 'x'. check for both
     items_to_print = inventory[inventory['PRINT DD-1750'] == 'x']
     return items_to_print
 
-''' returns: a DataFrame object with items combined 
-'''
+
 def combine_same_items(inventory):
+    ''' returns: a DataFrame object with items combined 
+    '''
     #create new DataFrame by combining rows with same id values
     #https://www.statology.org/pandas-combine-rows-with-same-column-value/
     #source https://stackoverflow.com/questions/33279940/how-to-combine-multiple-rows-of-strings-into-one-using-pandas
@@ -98,22 +108,24 @@ def combine_same_items(inventory):
     
     return df_combined
 
-''' returns  a list with items formated for DD-1750
 
-'  items' : must be already combined DataFrame object
-'''
 #todo check if there is no serial number 
 def format_for_1750(items):
+    ''' returns  a list with items formated for DD-1750
+
+    '  items' : must be already combined DataFrame object
+    '''
     list_dd1750 = list()
     for index, row in items.iterrows():
         list_dd1750.append(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
     return list_dd1750
 
-''' returns: a list of items limited to MAX_CHARS characters per item.
 
-items: must a list of strings
-'''
 def char_limit_items(items_list):
+    ''' returns: a list of items limited to MAX_CHARS characters per item.
+
+    items: must a list of strings
+    '''
     new_list = []
 
     for item in items_list:
@@ -131,13 +143,14 @@ def char_limit_items(items_list):
 
     return new_list
 
-''' returns: number of items for that object. Returns 1 if no serial numbers
 
-Function with search a string (from the end) for 'S/n' and count all the serial numbers after it for the total count. If there is no 'S/n', the total count will be 1, otherwise the total count will be the number of serial numbers which are separted by commas. Case matters. 
-
-item: must be all items for that item. Should not be split over lines or will get bad result. Must be combined and formatted with 'S/n'. Example: 'Garmin GPS 401 S/n: 1LR061007, 1LR061161' will return 2
-'''
 def number_of_items(item):
+    ''' returns: number of items for that object. Returns 1 if no serial numbers
+    in order to get a good count, the other cells must be blank (NaN)
+    Function with search a string (from the end) for 'S/n' and count all the serial numbers after it for the total count. If there is no 'S/n', the total count will be 1, otherwise the total count will be the number of serial numbers which are separted by commas. Case matters. 
+
+    item: must be all items for that item. Should not be split over lines or will get bad result. Must be combined and formatted with 'S/n'. Example: 'Garmin GPS 401 S/n: 1LR061007, 1LR061161' will return 2
+    '''
     #todo assume that all have serial number. Need to change this
     start_index = item.rfind('S/n')
     if(start_index != -1):
@@ -148,14 +161,15 @@ def number_of_items(item):
 
     return 1
 
-''' Returns: the fillable_fields_dict. 
-fills the specified dict (properly formated) with the contents at the specified box number
 
-box_num: must be int
-contents: string with item and serials
-fillable_fields_dict: dict for the 1750 PDF
-'''
 def fill_box_field(box_num, contents, fillable_fields_dict):
+    ''' Returns: the fillable_fields_dict. 
+    fills the specified dict (properly formated) with the contents at the specified box number
+
+    box_num: must be int
+    contents: string with item and serials
+    fillable_fields_dict: dict for the 1750 PDF
+    '''
     MAX_BOX_NUM = 18
     if(box_num <= MAX_BOX_NUM):
         box = 'box_' + str(box_num)
@@ -163,14 +177,16 @@ def fill_box_field(box_num, contents, fillable_fields_dict):
 
     return fillable_fields_dict
 
-''' Returns: the fillable_fields_dict. 
-fills the specified dict (properly formated) with the total number of items 
 
-total_num: must be int. this is the index of of the 'total' field
-contents: count of the number of items
-fillable_fields_dict: dict for the 1750 PDF
-'''
 def fill_total_field(total_num, contents, fillable_fields_dict):
+    ''' Returns: the fillable_fields_dict. 
+    fills the specified dict (properly formated) with the total number of items 
+
+    total_num: must be int. this is the index of of the 'total' field
+    contents: count of the number of items
+    fillable_fields_dict: dict for the 1750 PDF
+    '''
+    
     MAX_TOTAL_NUM = 18
     if(total_num <= MAX_TOTAL_NUM):
         total = 'total_' + str(total_num)
@@ -183,9 +199,8 @@ inventory = get_inventory()
 
 # added "PRINT DD-1750 column to the sheet
     #if the column contains a 'x', print to dd-1750
-    #in order to get a good count, the other cells must be blank (NaN)
-
-#options: should have a deployable, or something like that, column for items to add to 1750
+    
+#todo options: should have a deployable, or something like that, column for items to add to 1750
 #   but could ask user to enter in the sheet name to search, also the column number or names to add data to sheet
 
 # get data from excel sheet
