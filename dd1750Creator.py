@@ -169,7 +169,7 @@ items = char_limit_items(items)
 #for each item in items 
 #add to contents field while there is space
 for index, item in enumerate(items, start=1):
-    fill_box_field(
+    items = fill_box_field(index, item, items)
 
 #if not, make new page
 
