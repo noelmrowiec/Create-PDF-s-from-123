@@ -163,7 +163,7 @@ def number_of_items(item):
 
     return 1
 
-
+#todo combine into one function
 def fill_box_field(box_num, contents, fillable_fields_dict):
     ''' Returns: the fillable_fields_dict. 
     fills the specified dict (properly formated) with the contents at the specified box number
@@ -179,7 +179,7 @@ def fill_box_field(box_num, contents, fillable_fields_dict):
 
     return fillable_fields_dict
 
-
+#todo combine into one function
 def fill_total_field(total_num, contents, fillable_fields_dict):
     ''' Returns: the fillable_fields_dict. 
     fills the specified dict (properly formated) with the total number of items 
