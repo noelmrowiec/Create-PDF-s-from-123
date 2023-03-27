@@ -241,7 +241,7 @@ for index, item in enumerate(items, start=1):
 # save as new PDF
 
 # below from https://pypdf.readthedocs.io/
-reader = PdfReader("DD-Form-1750-Packing-List filled.pdf")
+reader = PdfReader("DD-Form-1750-Packing-List different version.pdf")
 writer = PdfWriter()
 
 #print(reader.get_form_text_fields(True))
