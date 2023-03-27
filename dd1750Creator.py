@@ -67,11 +67,6 @@ def get_items_to_print_to_1750(inventory):
 ''' returns: a DataFrame object with items combined 
 '''
 def combine_same_items(inventory):
-    #find all common names
-    #combine serials 
-    #either ouput or save
-    #define how to aggregate various fields
-
     #create new DataFrame by combining rows with same id values
     #https://www.statology.org/pandas-combine-rows-with-same-column-value/
     #source https://stackoverflow.com/questions/33279940/how-to-combine-multiple-rows-of-strings-into-one-using-pandas
