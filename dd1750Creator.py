@@ -194,6 +194,8 @@ def fill_total_field(total_num, contents, fillable_fields_dict):
 
     return fillable_fields_dict
     
+print(intro)
+
 # prompt user for input excel sheet file name
 inventory = get_inventory()
 
