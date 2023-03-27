@@ -135,7 +135,7 @@ def number_of_items(item):
 
     return 1
 
-''' Returns: the fillable_fields_dict is successful, otherwise False
+''' Returns: the fillable_fields_dict. 
 fills the specified dict (properly formated) with the contents at the specified box number
 
 box_num: must be int
