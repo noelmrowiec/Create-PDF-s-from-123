@@ -2,7 +2,9 @@
 1750 Creator
 author: Noel Mrowiec
 
-Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spredsheet). Requirements: use included DD-1750 PDF because it is unprotected and specific field names are use by the program to fillout the PDF. Additionally, the 123 excel spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items and 'PRINT TO DD-1750'    
+Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spredsheet). Requirements: place the included DD-1750 PDF in the same folder as program because it is unprotected and specific field names are use by the program to fillout the PDF. Additionally, the 123 excel spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items and 'PRINT TO DD-1750'. The program will add the information from the excel sheet if the is a 'x' in the 'PRINT TO DD-1750' column. The name as serial number of the selected items (items with the 'x') will be added to the DD-1750 PDF. Additionally, if there are repeated items, meaning items with the same common name, they will be combined on the PDF and the total number of that item will be shown in the total's column. 
+Currently, just use the 'simple sheet test.xlsx' because it includes the proper formating and the coulmn to select a print. 
+
 '''
 
 
@@ -36,7 +38,7 @@ def get_inventory():
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
-            inventory = pd.read_excel('simple sheet test.xlsx', dtype='string') #todo change back to sheet_filename # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
+            inventory = pd.read_excel(sheet_filename, dtype='string') #todo change back to sheet_filename # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
@@ -203,7 +205,7 @@ for index, item in enumerate(items, start=1):
 # save as new PDF
 
 # below from https://pypdf.readthedocs.io/
-reader = PdfReader("DD-Form-1750-Packing-List different version.pdf")
+reader = PdfReader("DD-Form-1750-Packing-List filled.pdf")
 writer = PdfWriter()
 
 
