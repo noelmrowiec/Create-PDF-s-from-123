@@ -43,6 +43,7 @@ def contains_invalid_chars(s):
 
 
 def is_valid_filename():
+    #todo not currently used because of testing
     #returns True if valid filename, otherwise false. 
     #Prompts user for a output PDF file name
     filename = input("Enter desired file name for output PDF: ")
@@ -56,6 +57,7 @@ def get_inventory():
     ''' returns: a DataFrame object (from the pandas library) containing the information from the first page.
     Prompts user to enter file name of 123 excel sheet. Waits until valid file name entered.
     '''
+    #todo use is valid filename function
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
