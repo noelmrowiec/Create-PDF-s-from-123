@@ -145,6 +145,21 @@ def fill_box_field(box_num, contents, fillable_fields_dict):
 
     return fillable_fields_dict
 
+''' Returns: the fillable_fields_dict. 
+fills the specified dict (properly formated) with the total number of items 
+
+total_num: must be int
+contents: string with item and serials
+fillable_fields_dict: dict for the 1750 PDF
+'''
+def fill_total_field(total_num, contents, fillable_fields_dict):
+    MAX_TOTAL_NUM = 18
+    if(total_num <= MAX_TOTAL_NUM):
+        total = 'total_' + str(total_num)
+        fillable_fields_dict[total] = contents
+
+    return fillable_fields_dict
+    
 # prompt user for input excel sheet file name
 inventory = get_inventory()
 # excel sheet doesn't work with default 123. Must create a new one
