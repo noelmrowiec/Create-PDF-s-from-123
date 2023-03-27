@@ -2,7 +2,15 @@
 1750 Creator
 author: Noel Mrowiec
 
-Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spredsheet). Requirements: place the included DD-1750 PDF in the same folder as program because it is unprotected and specific field names are use by the program to fillout the PDF. Additionally, the 123 excel spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items and 'PRINT TO DD-1750'. The program will add the information from the excel sheet if the is a 'x' in the 'PRINT TO DD-1750' column. The name as serial number of the selected items (items with the 'x') will be added to the DD-1750 PDF. Additionally, if there are repeated items, meaning items with the same common name, they will be combined on the PDF and the total number of that item will be shown in the total's column. 
+Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spredsheet). 
+Requirements: place the included DD-1750 PDF in the same folder as program because it is unprotected 
+and specific field names are use by the program to fillout the PDF. Additionally, the 123 excel 
+spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items 
+and 'PRINT TO DD-1750'. The program will add the information from the excel sheet if the is a 'x' in 
+the 'PRINT TO DD-1750' column. The name as serial number of the selected items (items with the 'x') 
+will be added to the DD-1750 PDF. Additionally, if there are repeated items, meaning items with the 
+same common name, they will be combined on the PDF and the total number of that item will be shown in 
+the total's column. 
 Currently, just use the 'simple sheet test.xlsx' because it includes the proper formating and the coulmn to select a print. 
 
 '''
@@ -164,7 +172,7 @@ def fill_total_field(total_num, contents, fillable_fields_dict):
     
 # prompt user for input excel sheet file name
 inventory = get_inventory()
-# excel sheet doesn't work with default 123. Must create a new one
+
 # added "PRINT DD-1750 column to the sheet
     #if the column contains a 'x', print to dd-1750
     #in order to get a good count, the other cells must be blank (NaN)
@@ -176,7 +184,7 @@ inventory = get_inventory()
 items = get_items_to_print_to_1750(inventory)
 
 
-# should put all the items with the same 'common name' on the same line with the serial numbers
+# puts all the items with the same 'common name' on the same line with the serial numbers
 items_combined = combine_same_items(items)
 
 items = format_for_1750(items_combined)
@@ -194,23 +202,22 @@ for index, item in enumerate(items, start=1):
     items = fill_box_field(index, item, fillable_fields_dict)
     #todo below is improper use. fix in future
     items = fill_total_field(index, count, fillable_fields_dict)
-#if not, make new page
+#todo if not, make new page
 
 
-# ask  to output dd1750 or da-2062
-# translate the fields in the excel sheet to the 1750 or 2062 
-# sum the columns and put total in total_#
-# prompt user for output filename
-# check valid
+# todo ask  to output dd1750 or da-2062
+# todo translate the fields in the excel sheet to the 1750 or 2062 
+# todo get correct sum the columns and put total in total_#
+# todo prompt user for output filename
+# todo check valid
+
 # save as new PDF
 
 # below from https://pypdf.readthedocs.io/
 reader = PdfReader("DD-Form-1750-Packing-List filled.pdf")
 writer = PdfWriter()
 
-
 #print(reader.get_form_text_fields(True))
-
 
 page = reader.pages[0]   # from https://pypdf.readthedocs.io/
 fields = reader.get_fields()     # from https://pypdf.readthedocs.io/
