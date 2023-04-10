@@ -197,21 +197,21 @@ def fill_field(field_selection, num, contents, fillable_fields_dict):
     return fillable_fields_dict
 
 #todo combine into one function
-def fill_total_field(total_num, contents, fillable_fields_dict):
-    ''' Returns: the fillable_fields_dict. 
-    fills the specified dict (properly formated) with the total number of items 
+#def fill_total_field(total_num, contents, fillable_fields_dict):
+#    ''' Returns: the fillable_fields_dict. 
+#    fills the specified dict (properly formated) with the total number of items 
 
-    total_num: must be int. this is the index of of the 'total' field
-    contents: count of the number of items
-    fillable_fields_dict: dict for the 1750 PDF
-    '''
+#    total_num: must be int. this is the index of of the 'total' field
+#    contents: count of the number of items
+#    fillable_fields_dict: dict for the 1750 PDF
+#    '''
     
-    MAX_TOTAL_NUM = 18
-    if(total_num <= MAX_TOTAL_NUM):
-        total = 'total_' + str(total_num)
-        fillable_fields_dict[total] = contents
+#    MAX_TOTAL_NUM = 18
+#    if(total_num <= MAX_TOTAL_NUM):
+#        total = 'total_' + str(total_num)
+#        fillable_fields_dict[total] = contents
 
-    return fillable_fields_dict
+#    return fillable_fields_dict
     
 #print(intro) todo print 
 
@@ -243,9 +243,9 @@ fillable_fields_dict = {'box_1': '', 'contents_1': '', 'unit_1': '', 'init_1': '
     
 for index, item in enumerate(items, start=1):
     count = number_of_items(item) #todo wrong count b/c split over lines. must change in future
-    items = fill_box_field(index, item, fillable_fields_dict)
+    items = fill_field(index, item, fillable_fields_dict)
     #todo below is improper use. fix in future
-    items = fill_total_field(index, count, fillable_fields_dict)
+    items = fill_field(index, count, fillable_fields_dict)
 #todo if not, make new page
 
 
