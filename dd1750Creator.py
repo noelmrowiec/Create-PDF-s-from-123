@@ -61,7 +61,7 @@ def get_inventory():
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
             #inventory = pd.read_excel(sheet_filename, dtype='string') # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
-            inventory = pd.read_excel('simple sheet test2.xlsx', dtype='string')
+            inventory = pd.read_excel('simple sheet test2.xlsx', dtype='string')    #todo remove
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
@@ -186,7 +186,8 @@ def fill_field(field_selection, num, contents, fillable_fields_dict):
     ''' Returns: the fillable_fields_dict. 
     fills the specified dict (properly formated) with the field filled 
 
-    total_num: must be int. this is the index of of the 'total' field
+    field_selection: string for the field selected ex) 'total_' or 'contents_'
+    num: must be int. this is the index of of the field
     contents: count of the number of items
     fillable_fields_dict: dict for the 1750 PDF
     '''
