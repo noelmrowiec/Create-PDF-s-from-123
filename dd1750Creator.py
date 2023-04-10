@@ -197,23 +197,6 @@ def fill_field(field_selection, num, contents, fillable_fields_dict):
         fillable_fields_dict[field] = contents
 
     return fillable_fields_dict
-
-#todo combine into one function
-#def fill_total_field(total_num, contents, fillable_fields_dict):
-#    ''' Returns: the fillable_fields_dict. 
-#    fills the specified dict (properly formated) with the total number of items 
-
-#    total_num: must be int. this is the index of of the 'total' field
-#    contents: count of the number of items
-#    fillable_fields_dict: dict for the 1750 PDF
-#    '''
-    
-#    MAX_TOTAL_NUM = 18
-#    if(total_num <= MAX_TOTAL_NUM):
-#        total = 'total_' + str(total_num)
-#        fillable_fields_dict[total] = contents
-
-#    return fillable_fields_dict
     
 #print(intro) todo print 
 
