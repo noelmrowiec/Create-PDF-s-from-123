@@ -60,7 +60,8 @@ def get_inventory():
     while True:
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
-            inventory = pd.read_excel(sheet_filename, dtype='string') # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
+            #inventory = pd.read_excel(sheet_filename, dtype='string') # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
+            inventory = pd.read_excel('simple sheet test2.xlsx', dtype='string')
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
@@ -243,9 +244,9 @@ fillable_fields_dict = {'box_1': '', 'contents_1': '', 'unit_1': '', 'init_1': '
     
 for index, item in enumerate(items, start=1):
     count = number_of_items(item) #todo wrong count b/c split over lines. must change in future
-    items = fill_field(index, item, fillable_fields_dict)
-    #todo below is improper use. fix in future
-    items = fill_field(index, count, fillable_fields_dict)
+    items = fill_field('contents_',index, item, fillable_fields_dict)
+    #total item
+    items = fill_field('total_',index, count, fillable_fields_dict)
 #todo if not, make new page
 
 
