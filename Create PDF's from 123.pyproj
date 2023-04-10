@@ -32,7 +32,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="123 Working 08july22.xlsx" />
-    <Content Include="simple sheet test.xlsx" />
     <Content Include="test 123.xlsx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
