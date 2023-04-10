@@ -133,7 +133,7 @@ def char_limit_items(items_list):
     new_list = []
 
     for item in items_list:
-        MAX_CHARS = 100      #todo maybe move?
+        MAX_CHARS = 120      #todo maybe move? maybe more
         substring = item      
         split_index = 0
 
