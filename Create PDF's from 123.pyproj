@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3cd366ae-0f7b-47c5-8891-4ae56705606e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_dd1750Creator..py</StartupFile>
+    <StartupFile>dd1750Creator.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
