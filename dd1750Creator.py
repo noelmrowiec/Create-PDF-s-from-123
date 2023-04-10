@@ -96,6 +96,7 @@ def get_items_to_print_to_1750(inventory):
 
 def combine_same_items(inventory):
     ''' returns: a DataFrame object with items combined 
+    todo: inventory must be a text based sheet. It doesn't work for a modified sheet for some reason.'
     '''
     #create new DataFrame by combining rows with same id values
     #https://www.statology.org/pandas-combine-rows-with-same-column-value/
@@ -105,7 +106,8 @@ def combine_same_items(inventory):
 
     #df_new = inventory.groupby('COMMON NAME')
     # groups items with the same common name and aggregates the serial number into one comma-separted string with all of the serial numbers
-
+    
+    print(inventory) #todo remove
     df_combined = inventory.groupby(['COMMON NAME'], as_index= False).aggregate({'SERIAL' : ', '.join})
     
     return df_combined
