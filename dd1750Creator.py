@@ -19,7 +19,7 @@ count of each item functions as expected.
 -The user cannot name the output file. Currently, it is given the name DD-Form-1750-Packing-List filled.pdf
  and the source PDF filled-out.pdf must be in the same file as the program. 
 
-More features to follow. 
+- 18APR: Note: Common name cannot be blank, otherwise it will not be added to list  
 '''
 
 
@@ -52,7 +52,7 @@ def is_valid_filename():
         return True
 
 
-def get_inventory(filename):
+def get_inventory():
     ''' returns: a DataFrame object (from the pandas library) containing the information from the first page.
     Prompts user to enter file name of 123 excel sheet. Waits until valid file name entered.
     '''
@@ -97,6 +97,7 @@ def get_items_to_print_to_1750(inventory):
 def combine_same_items(inventory):
     ''' returns: a DataFrame object with items combined 
     todo: inventory must be a text based sheet. It doesn't work for a modified sheet for some reason.'
+    Precondition: COMMON NAME must not be blank otherwise this function will not include it
     '''
     #create new DataFrame by combining rows with same id values
     #https://www.statology.org/pandas-combine-rows-with-same-column-value/
@@ -213,10 +214,13 @@ inventory = get_inventory()
 # get data from excel sheet
 items = get_items_to_print_to_1750(inventory)
 
+# fill in blank serial values in the serial number column with "N/A"
+items['SERIAL'].fillna('N/A', inplace=True)
+print(items)#todo remove
 
 # puts all the items with the same 'common name' on the same line with the serial numbers
 items_combined = combine_same_items(items)
-print(items_combined)#todo remove
+
 items = format_for_1750(items_combined)
 
 items = char_limit_items(items)

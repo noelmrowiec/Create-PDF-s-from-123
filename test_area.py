@@ -30,6 +30,18 @@ for item in items_list:
 
     new_list.append(substring.strip())
 
-print(new_list)
+#print(new_list)
 
 ['Garmin GPS 401 S/n: 1LR061007, 1LR061007,', '1LR061007, 1LR061007,1LR061161, 1LR061161,', '1LR061161, 1LR061161, 1LR061161, 1LR061161', 'Smae 343344535', 'ff', 'Garmin GPS 401 S/n: 1LR061007, 1LR061007,', '1LR061007, 1LR061007,1LR061161, 1LR061161,', '1LR061161, 1LR061161, 1LR061161, 1LR061161,3 ,', '4522 , 232, 1LR061007, 1LR061007, 1LR061007,', '1LR061007,1LR061161, 1LR061161, 1LR061161,', '1LR061161, 1LR061161, 1LR061161,', 'lass s/n: 4']
+
+
+# read the excel sheet into a Pandas DataFrame
+inventory_data = pd.read_excel('simple sheet test.xlsx')
+
+
+items_to_print = inventory_data[inventory_data['PRINT DD-1750'] == 'x']
+
+# group the data by name and serial number
+df_combined = items_to_print.groupby(['COMMON NAME'], as_index= False).aggregate({'SERIAL' : ', '.join})
+print(df_combined)
+
