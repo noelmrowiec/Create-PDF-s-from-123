@@ -44,7 +44,7 @@ class Test_dd1750Creator(unittest.TestCase):
         items = get_items_to_print_to_1750(inventory)
         items_to_print = combine_same_items(items)
 
-        data={'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007, 1LR061161','58A022747', 'A0']}
+        #data={'COMMON NAME' : ['Garmin GPS 401', 'Garmin GPS 601', 'MULTI CAM RUCK'], 'SERIAL' : ['1LR061007, 1LR061161','58A022747', 'A0']}
         expected_result = pd.DataFrame(data)
         self.assertEqual(str(items_to_print), str(expected_result))
     

@@ -52,7 +52,7 @@ def is_valid_filename():
         return True
 
 
-def get_inventory():
+def get_inventory(filename):
     ''' returns: a DataFrame object (from the pandas library) containing the information from the first page.
     Prompts user to enter file name of 123 excel sheet. Waits until valid file name entered.
     '''
@@ -61,7 +61,7 @@ def get_inventory():
         sheet_filename = input("Enter file name of valid excel sheet (must be a \"123 Sheet\"): ")
         try:
             #inventory = pd.read_excel(sheet_filename, dtype='string') # source: https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html#text-data-types
-            inventory = pd.read_excel('simple sheet test.xlsx', dtype='string')    #todo remove
+            inventory = pd.read_excel(sheet_filename, dtype='string')    
             return inventory
         except:
             print('You entered "' + str(sheet_filename) + '", file name not found. Check file name.')
@@ -107,7 +107,6 @@ def combine_same_items(inventory):
     #df_new = inventory.groupby('COMMON NAME')
     # groups items with the same common name and aggregates the serial number into one comma-separted string with all of the serial numbers
     
-    print(inventory) #todo remove
     df_combined = inventory.groupby(['COMMON NAME'], as_index= False).aggregate({'SERIAL' : ', '.join})
     
     return df_combined
@@ -217,7 +216,7 @@ items = get_items_to_print_to_1750(inventory)
 
 # puts all the items with the same 'common name' on the same line with the serial numbers
 items_combined = combine_same_items(items)
-
+print(items_combined)#todo remove
 items = format_for_1750(items_combined)
 
 items = char_limit_items(items)
