@@ -38,7 +38,8 @@ for item in items_list:
 # read the excel sheet into a Pandas DataFrame
 inventory_data = pd.read_excel('simple sheet test.xlsx')
 
-
+# fill in blank values in the serial number column with "N/A"
+inventory_data['SERIAL'].fillna('N/A', inplace=True)
 items_to_print = inventory_data[inventory_data['PRINT DD-1750'] == 'x']
 
 # group the data by name and serial number
