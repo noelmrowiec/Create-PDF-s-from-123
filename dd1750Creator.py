@@ -124,12 +124,15 @@ def format_for_1750(items):
         list_dd1750.append(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
     return list_dd1750
 
-def char_limit_item(items_list):
+def char_limit_item(item):
     ''' returns: a list of the item split up as MAX_CHARS characters per line.
 
     item: must a single string with item info
     '''
     new_list = []
+    MAX_CHARS = 120      #todo maybe move? maybe more
+    substring = item      
+    split_index = 0
 
     while len(substring) > MAX_CHARS:
         #todo -1 means it is not found. account for this 
@@ -137,11 +140,13 @@ def char_limit_item(items_list):
         new_list.append(substring[:split_index].strip())      
         substring = substring[split_index:]
 
-        index += 1;                 # update index of split
+        #index += 1;                 # update index of split
 
     new_list.append(substring.strip())
 
     return new_list
+
+def 
 
 def char_limit_items(items_list):
     ''' returns: a list of items limited to MAX_CHARS characters per item.
@@ -170,6 +175,7 @@ def char_limit_items(items_list):
 
 def number_of_items(item):
     ''' returns: number of items for that object. Returns 1 if no serial numbers
+    todo: update this 
     in order to get a good count, the other cells must be blank (NaN)
     Function with search a string (from the end) for 'S/n' and count all the serial numbers after it for the total count. If there is no 'S/n', the total count will be 1, otherwise the total count will be the number of serial numbers which are separted by commas. Case matters. 
 
@@ -239,9 +245,9 @@ items = get_items_to_print_to_1750(inventory)
 items = items.fillna(value={'SERIAL' : 'N/A'})
 
 # puts all the items with the same 'common name' on the same line with the serial numbers
-items_combined = combine_same_items(items)
-
-items = format_for_1750(items_combined)
+items = combine_same_items(items)
+#todo change this naming 
+items = format_for_1750(items)
 
 #for each item in items 
 #add to contents field while there is space
@@ -255,7 +261,9 @@ for index, item in enumerate(items, start=1):
     #total item
     fillable_fields_dict = fill_field('total_',index, count, fillable_fields_dict) 
 
+    #changed with new method
 items = char_limit_items(items)
+
 
 #todo total are misalined
 for index, item in enumerate(items, start=1):
