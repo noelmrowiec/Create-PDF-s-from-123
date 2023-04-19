@@ -216,10 +216,7 @@ items = get_items_to_print_to_1750(inventory)
 
 # fill in blank serial values in the serial number column with "N/A"
 #todo allow for blank COMMON NAME 's and replace with NSN name or MPO description
-#items['SERIAL'].fillna('N/A', inplace=True) 
-#alternative to selecting 'SERIAL'
 items = items.fillna(value={'SERIAL' : 'N/A'})
-print(items)#todo remove
 
 # puts all the items with the same 'common name' on the same line with the serial numbers
 items_combined = combine_same_items(items)
