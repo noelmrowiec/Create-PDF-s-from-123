@@ -124,6 +124,24 @@ def format_for_1750(items):
         list_dd1750.append(str(row['COMMON NAME']) + ' S/n: ' + str(row['SERIAL']))
     return list_dd1750
 
+def char_limit_item(items_list):
+    ''' returns: a list of the item split up as MAX_CHARS characters per line.
+
+    item: must a single string with item info
+    '''
+    new_list = []
+
+    while len(substring) > MAX_CHARS:
+        #todo -1 means it is not found. account for this 
+        split_index = substring.rindex(',', 0, MAX_CHARS) + 1     #add 1 to split after the comma
+        new_list.append(substring[:split_index].strip())      
+        substring = substring[split_index:]
+
+        index += 1;                 # update index of split
+
+    new_list.append(substring.strip())
+
+    return new_list
 
 def char_limit_items(items_list):
     ''' returns: a list of items limited to MAX_CHARS characters per item.
@@ -132,7 +150,7 @@ def char_limit_items(items_list):
     '''
     new_list = []
 
-    for item in items_list:
+    for index, item in enumerate(items_list):
         MAX_CHARS = 120      #todo maybe move? maybe more
         substring = item      
         split_index = 0
@@ -142,6 +160,8 @@ def char_limit_items(items_list):
             split_index = substring.rindex(',', 0, MAX_CHARS) + 1     #add 1 to split after the comma
             new_list.append(substring[:split_index].strip())      
             substring = substring[split_index:]
+
+            index += 1;                 # update index of split
 
         new_list.append(substring.strip())
 
@@ -222,7 +242,6 @@ items = items.fillna(value={'SERIAL' : 'N/A'})
 items_combined = combine_same_items(items)
 
 items = format_for_1750(items_combined)
-print(items)
 
 #for each item in items 
 #add to contents field while there is space
@@ -238,9 +257,10 @@ for index, item in enumerate(items, start=1):
 
 items = char_limit_items(items)
 
+#todo total are misalined
 for index, item in enumerate(items, start=1):
     items = fill_field('contents_',index, item, fillable_fields_dict)
-    #total item
+
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 
