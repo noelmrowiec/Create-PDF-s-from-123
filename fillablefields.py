@@ -119,6 +119,17 @@ class FillableFields(object):
         else:
             return False
 
-    #def is_full(self):
-    #    return False #todo change so tracks if full
+    def to_dict(self):
+        ff_dict = {}
+
+        #add all boxes to the dict
+        boxes  = self.get_box_fields()
+        for line_num, box in enumerate(boxes):
+            ff_dict[f'box_{line_num}'] = box
+
+        #add all boxes to the dict
+        boxes  = self.get_box_fields()
+        for line_num, box in enumerate(boxes):
+            ff_dict[f'box_{line_num}'] = box
+        return False
 
