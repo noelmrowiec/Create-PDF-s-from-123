@@ -243,7 +243,6 @@ for item in items:
 # todo translate the fields in the excel sheet to the 1750 or 2062 
 # todo get correct sum the columns and put total in total_#
 # todo prompt user for output filename
-# todo check valid
 
 # save as new PDF
 
