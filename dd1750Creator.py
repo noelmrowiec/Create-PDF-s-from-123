@@ -227,17 +227,19 @@ ff = FillableFields()
 
 # Add the inventory items to a FillableFields object so that the items
 # are in the proper format to ouput to a PDF
+line_num = 1    #start at 1 b/c line num starts at 1
 for item in items:  
     # Put total number of items on first line of the items
     count = number_of_items(item) 
-    ff.add_total_field(count)
+    ff.add_total_field(count, line_num)
 
     # split up the items so that the contents is split over multiple lines
     # if necessary. Otherwise, all items will be on the first line with the 
     # total count
     item_split_list = char_limit_item(item)
     for line in item_split_list:
-        ff.add_contents_field(line)
+        ff.add_contents_field(line, line_num)
+        line_num += 1   #since contents is split over a line, increment line number
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 
@@ -259,7 +261,7 @@ fields = reader.get_fields()     # from https://pypdf.readthedocs.io/
 
 
 writer.add_page(page)   # from https://pypdf.readthedocs.io/
-writer.update_page_form_field_values(writer.pages[0], ff.to_dict()) # from https://pypdf.readthedocs.io/
+writer.update_page_form_field_values(writer.pages[0], ff.ff_dict) # from https://pypdf.readthedocs.io/
 
 
 
