@@ -24,16 +24,12 @@ count of each item functions as expected.
 
 import logging
 import sys
-logging.basicConfig(filename='dd1750CreatorLog.txt', level=logging.DEBUG, format='
-%(asctime)s -  %(levelname)s -  %(message)s')
+logging.basicConfig(filename='dd1750CreatorLog.txt', level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
 try:
-
-    from asyncio.windows_events import NULL
-    from csv import excel_tab
-    import sys
+    from fillablefields import FillableFields
     from pypdf import PdfReader, PdfWriter      
-    import pandas as pd                         #for read excel sheets
-    import re                                   #import for regex for file name checks
+    import pandas as pd                #for read excel sheets
+    import re                          #import for regex for file name checks
 except:
     logging.critical("Library imports failed")
     print("Unable to import 3rd party libraries. Check that pypdf and pandas and installed.")
@@ -221,32 +217,32 @@ items = combine_same_items(items)
 #todo change this naming 
 items = format_for_1750(items)
 
+
 #for each item in items 
 #add to contents field while there is space
 #todo make new page if not space
 #add the data to the dict below which will print to the DD-1750
-fillable_fields_dict = {'box_1': '', 'contents_1': '', 'unit_1': '', 'init_1': '', 'box_2': '', 'contents_2': '', 'unit_2': '', 'init_2': '', 'spares_2': '', 'box_3': '', 'contents_3': '', 'unit_3': '', 'init_3': '', 'spares_3': '', 'box_4': '', 'contents_4': '', 'unit_4': '', 'init_4': '', 'spares_4': '', 'box_5': '', 'contents_5': '', 'unit_5': '', 'init_5': '', 'spares_5': '', 'contents_6': '', 'unit_6': '', 'init_6': '', 'spares_6': '', 'box_6': '', 'init_7': '', 'spares_7': '', 'box_7': '', 'contents_7': '', 'unit_7': '', 'box_8': '', 'contents_8': '', 'unit_8': '', 'init_8': '', 'spares_8': '', 'box_9': '', 'contents_9': '', 'unit_9': '', 'init_9': '', 'spares_9': '', 'box_10': '', 'contents_10': '', 'unit_10': '', 'init_10': '', 'spares_10': '', 'box_11': '', 'contents_11': '', 'unit_11': '', 'init_11': '', 'spares_11': '', 'box_12': '', 'contents_12': '', 'unit_12': '', 'init_12': '', 'spares_12': '', 'box_13': '', 'contents_13': '', 'unit_13': '', 'init_13': '', 'spares_13': '', 'box_14': '', 'contents_14': '', 'unit_14': '', 'init_14': '', 'spares_14': '', 'box_15': '', 'contents_15': '', 'unit_15': '', 'init_15': '', 'spares_15': '', 'box_16': '', 'contents_16': '', 'unit_16': '', 'init_16': '', 'spares_16': '', 'box_17': '', 'contents_17': '', 'unit_17': '', 'init_17': '', 'spares_17': '', 'box_18': '', 'contents_18': '', 'unit_18': '', 'init_18': '', 'spares_18': '', 'certname': '', 'end_item': '', 'packed_by': '', 'no_boxes': '', 'req_no': '', 'order_no': '', 'date': '', 'total_pages': '', 'spares_1': '', 'cur_page': '', 'total_1': '', 'total_2': '', 'total_3': '', 'total_6': '', 'total_4': '', 'total_5': '', 'total_7': '', 'total_8': '', 'total_9': '', 'total_10': '', 'total_11': '', 'total_12': '', 'total_13': '', 'total_14': '', 'total_15': '', 'total_16': '', 'total_17': '', 'total_18': ''}
+ff = FillableFields()
 
-current_index = 1
-#Set correct count of items
-for old_index, item in enumerate(items, start=1):
+
+# Add the inventory items to a FillableFields object so that the items
+# are in the proper format to ouput to a PDF
+for item in items:  
+    # Put total number of items on first line of the items
     count = number_of_items(item) 
-    fillable_fields_dict = fill_field('total_',current_index, count, fillable_fields_dict)
+    ff.add_total_field(count)
 
+    # split up the items so that the contents is split over multiple lines
+    # if necessary. Otherwise, all items will be on the first line with the 
+    # total count
     item_split_list = char_limit_item(item)
     for line in item_split_list:
-        items = fill_field('contents_',current_index, line, fillable_fields_dict)
-        current_index += 1              #todo check that this will be updated every time
-
-    
-    #changed with new method
-#items = char_limit_items(items)
+        ff.add_contents_field(line)
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 
 # todo get correct sum the columns and put total in total_#
 # todo prompt user for output filename
-# todo check valid
 
 # save as new PDF
 
@@ -262,11 +258,8 @@ page = reader.pages[0]   # from https://pypdf.readthedocs.io/
 fields = reader.get_fields()     # from https://pypdf.readthedocs.io/
 
 
-
-
-
 writer.add_page(page)   # from https://pypdf.readthedocs.io/
-writer.update_page_form_field_values(writer.pages[0], fillable_fields_dict) # from https://pypdf.readthedocs.io/
+writer.update_page_form_field_values(writer.pages[0], ff.to_dict()) # from https://pypdf.readthedocs.io/
 
 
 

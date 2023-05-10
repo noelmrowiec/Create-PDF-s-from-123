@@ -115,6 +115,3 @@ while added == True:
 items = ff.get_uint_fields()
 for item in items:
     print(item)
-
-ff.certname = 'Noel'
-print(ff.certname)
