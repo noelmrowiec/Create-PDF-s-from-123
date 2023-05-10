@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3cd366ae-0f7b-47c5-8891-4ae56705606e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_dd1750Creator..py</StartupFile>
+    <StartupFile>test_area.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,8 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="fillablefields.py" />
     <Compile Include="dd1750Creator.py" />
-    <Compile Include="encrypt.py" />
     <Compile Include="test_area.py" />
     <Compile Include="testDifferentPDF.py" />
     <Compile Include="test_dd1750Creator..py">

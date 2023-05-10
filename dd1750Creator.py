@@ -22,13 +22,22 @@ count of each item functions as expected.
 - 18APR: Note: Common name cannot be blank, otherwise it will not be added to list  
 '''
 
-
-from asyncio.windows_events import NULL
-from csv import excel_tab
+import logging
 import sys
-from pypdf import PdfReader, PdfWriter      
-import pandas as pd                         #for read excel sheets
-import re                                   #import for regex for file name checks
+logging.basicConfig(filename='dd1750CreatorLog.txt', level=logging.DEBUG, format='
+%(asctime)s -  %(levelname)s -  %(message)s')
+try:
+
+    from asyncio.windows_events import NULL
+    from csv import excel_tab
+    import sys
+    from pypdf import PdfReader, PdfWriter      
+    import pandas as pd                         #for read excel sheets
+    import re                                   #import for regex for file name checks
+except:
+    logging.critical("Library imports failed")
+    print("Unable to import 3rd party libraries. Check that pypdf and pandas and installed.")
+    sys.exit()
 
 
 def contains_invalid_chars(s):
