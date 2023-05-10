@@ -232,28 +232,27 @@ items = combine_same_items(items)
 #todo change this naming 
 items = format_for_1750(items)
 
+
 #for each item in items 
 #add to contents field while there is space
 #todo make new page if not space
 #add the data to the dict below which will print to the DD-1750
 ff = FillableFields()
 
-current_index = 1
 
-print("items = ")
-for old_index, item in enumerate(items, start=1):
-    print(item)
-
-for old_index, item in enumerate(items, start=1):   #start at 1 because ...
-    #
+# Add the inventory items to a FillableFields object so that the items
+# are in the proper format to ouput to a PDF
+for item in items:  
+    # Put total number of items on first line of the items
     count = number_of_items(item) 
     ff.add_total_field(count)
 
+    # split up the items so that the contents is split over multiple lines
+    # if necessary. Otherwise, all items will be on the first line with the 
+    # total count
     item_split_list = char_limit_item(item)
     for line in item_split_list:
         ff.add_contents_field(line)
-        current_index += 1              #todo check that this will be updated every time
-
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 
@@ -275,11 +274,8 @@ page = reader.pages[0]   # from https://pypdf.readthedocs.io/
 fields = reader.get_fields()     # from https://pypdf.readthedocs.io/
 
 
-
-
-
 writer.add_page(page)   # from https://pypdf.readthedocs.io/
-writer.update_page_form_field_values(writer.pages[0], fillable_fields_dict) # from https://pypdf.readthedocs.io/
+writer.update_page_form_field_values(writer.pages[0], ff.to_dict()) # from https://pypdf.readthedocs.io/
 
 
 
