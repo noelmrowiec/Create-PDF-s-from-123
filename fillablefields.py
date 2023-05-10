@@ -27,11 +27,6 @@ class FillableFields(object):
 
     uint = []
 
-    #def __init__(self):
-    #    #add blank
-    #    for i in range(self.MAX_ITEMS):
-    #        add_box_
-
     '''
     returns: True is text for the box field is added to the box list, otherwise false if the length of the box list is greater than MAX_ITEMS
 
@@ -95,31 +90,4 @@ class FillableFields(object):
             return True
         else:
             return False
-
-    '''
-    returns: a dictionary of the Fillable Fields class
-
-    Call this function in order to get the properly formatted dict to output to a PDF. 
-    '''
-    def to_dict(self):
-        ff_dict = {}
-
-        #add all boxes to the dict
-        #start at 1 b/c PDF field names start at 1
-        for line_num, box in enumerate(self.box, start=1):  
-            ff_dict[f'box_{line_num}'] = box
-
-        #add all contents to the dict
-        #start at 1 b/c PDF field names start at 1
-        for line_num, content in enumerate(self.contents, start=1):
-            ff_dict[f'contents_{line_num}'] = content
-        
-        #add all totals to the dict
-        #start at 1 b/c PDF field names start at 1
-        for line_num, total in enumerate(self.total, start=1):
-            ff_dict[f'total_{line_num}'] = total
-
-        #todo other fields to fill
-
-        return ff_dict
 

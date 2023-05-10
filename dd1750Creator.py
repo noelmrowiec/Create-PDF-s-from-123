@@ -95,6 +95,14 @@ def get_items_to_print_to_1750(inventory):
      items from inventory that have the 'x' in the column to print the 1750
     '''
     # todo right now, must be lower case 'x'. check for both
+    
+    #for i, v in enumerate(inventory['PRINT DD-1750']):
+    #    #convert all 'x' to lowercase
+    #    if v == 'x' or v == 'X':
+            
+    #        inventory['PRINT DD-1750'][i] = v.lower()
+    #        print(inventory['PRINT DD-1750'][i])
+    
     items_to_print = inventory[inventory['PRINT DD-1750'] == 'x']
     return items_to_print
 
@@ -178,8 +186,6 @@ def char_limit_items(items_list):
 
 def number_of_items(item):
     ''' returns: number of items for that object. Returns 1 if no serial numbers
-    todo: update this 
-    in order to get a good count, the other cells must be blank (NaN)
     Function with search a string (from the end) for 'S/n' and count all the serial numbers after it for the total count. If there is no 'S/n', the total count will be 1, otherwise the total count will be the number of serial numbers which are separted by commas. Case matters. 
 
     item: must be all items for that item. Should not be split over lines or will get bad result. Must be combined and formatted with 'S/n'. Example: 'Garmin GPS 401 S/n: 1LR061007, 1LR061161' will return 2
@@ -198,9 +204,6 @@ def number_of_items(item):
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
-
-# added "PRINT DD-1750 column to the sheet
-    #if the column contains a 'x', print to dd-1750
     
 #todo options: should have a deployable, or something like that, column for items to add to 1750
 #   but could ask user to enter in the sheet name to search, also the column number or names to add data to sheet
@@ -209,8 +212,10 @@ inventory = get_inventory()
 items = get_items_to_print_to_1750(inventory)
 
 # fill in blank serial values in the serial number column with "N/A"
-#todo allow for blank COMMON NAME 's and replace with NSN name or MPO description
+
 items = items.fillna(value={'SERIAL' : 'N/A'})
+#todo allow for blank COMMON NAME 's and replace with NSN name or MPO description
+items = items.fillna(value={'COMMON NAME' : items['NSN DESCRIPTION']}) # 
 
 # puts all the items with the same 'common name' on the same line with the serial numbers
 items = combine_same_items(items)
