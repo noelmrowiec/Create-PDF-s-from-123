@@ -193,21 +193,6 @@ def number_of_items(item):
         return len(serial_nums)
 
     return 1
-
-''' returns: a fillable_fields_dict with the specified field containing the contents
-'''
-def fill_field(field_selection, num, contents, fillable_fields_dict):
-    ''' Returns: the fillable_fields_dict. 
-    fills the specified dict (properly formated) with the field filled 
-
-    field_selection: string for the field selected ex) 'total_' or 'contents_'
-    num: must be int. this is the index of of the field
-    contents: count of the number of items
-    fillable_fields_dict: dict for the 1750 PDF
-    '''
-    fillable_fields.add = contents
-
-    return fillable_fields_dict
     
 #print(intro) todo print 
 
