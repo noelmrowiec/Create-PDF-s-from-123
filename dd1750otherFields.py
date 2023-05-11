@@ -1,3 +1,12 @@
+'''
+dd1750otherFields.py
+Author: Noel Mrowiec
+Date: 10May2023 
+
+Helper methods for adding the fields on the DD-1750 which are not in the 123 excel sheet.
+
+'''
+
 def prompt_end_item_field(ff):
     ''' returns: FillableFields object
     Adds to FillableFields object with END ITEM information 
