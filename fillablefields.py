@@ -5,6 +5,7 @@ class FillableFields(object):
     box = []
 
     certname = ''
+    packed_by = ''
 
     contents = []
 
@@ -16,7 +17,6 @@ class FillableFields(object):
 
     no_boxes = ''
     order_no = ''
-    packed_by = ''
     req_no = ''
 
     spares = []

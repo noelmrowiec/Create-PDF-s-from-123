@@ -28,9 +28,9 @@ logging.basicConfig(filename='dd1750CreatorLog.txt', level=logging.DEBUG, format
 try:
     from fillablefields import FillableFields
     from dd1750HelperFunctions import *
+    from dd1750otherFields import *
     from pypdf import PdfReader, PdfWriter      
-    #import pandas as pd                #for read excel sheets
-    #import re                          #import for regex for file name checks
+
 except:
     logging.critical("Library imports failed")
     print("Unable to import 3rd party libraries. Check that pypdf and pandas and installed.")
@@ -40,7 +40,7 @@ except:
 
     
 #print(intro) todo print 
-print("Welcome to 123 to DD-1750 creator \nBefore beginning, please make sure you have the 123 excel sheet and editable DD-1750 in the same file as the program. The DD-1750 should be bundled with the program. (Note: The DD-1750 cannot be the form from military website since those forms are secured and have different settings).")
+print("Welcome to 123 to DD-1750 creator \nBefore beginning, please make sure you have the 123 excel sheet and editable DD-1750 in the same file as the program. The DD-1750 should be bundled with the program. (Note: The DD-1750 cannot be the form from military website since those forms are secured and have different settings).\n")
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
@@ -70,7 +70,8 @@ items_list = format_for_1750(items)
 ff = FillableFields()
 
 
-ff = func(items_list, ff)
+ff = add_inventory_to_FillableFields(items_list, ff)
+ff = add_other_field(ff)
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 
