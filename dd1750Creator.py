@@ -254,7 +254,23 @@ for item in items:
 # save as new PDF
 
 # below from https://pypdf.readthedocs.io/
-reader = PdfReader("DD-Form-1750-Packing-List different version.pdf")
+
+pdfOpened = False
+pdfFilename  = "DD-Form-1750-Packing-List editable.pdf" #todo change to real filename
+
+reader = PdfReader(pdfFilename)
+#while not pdfOpened:
+#    # try opening the DD-1750 PDF using the default filename
+#    try:
+#        reader = PdfReader(pdfFilename)
+#        pdfOpened = True
+#    except FileNotFoundError: 
+
+#        logging.error("Default filename for opening DD-1750 incorrect")
+#        print("DD-1750 Form to output could not be found. Make sure the following PDF is in the same folder \"DD-Form-1750-Packing-List editable\"")
+#        #default filename failed, so ask user for filename
+#        pdfFilename = input("Enter the full filename to the editable DD-1750 PDF:\n")
+
 writer = PdfWriter()
 
 
@@ -269,7 +285,9 @@ writer.add_page(page)   # from https://pypdf.readthedocs.io/
 writer.update_page_form_field_values(writer.pages[0], ff.ff_dict) # from https://pypdf.readthedocs.io/
 
 
-
+#todo PermissionError when file open
 # write "output" to pypdf-output.pdf # below from https://pypdf.readthedocs.io/
 with open("filled-out.pdf", "wb") as output_stream:
     writer.write(output_stream)
+
+print("DD-1750 successfully outputted") #todo better info needed
