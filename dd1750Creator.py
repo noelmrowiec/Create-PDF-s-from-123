@@ -66,12 +66,15 @@ items_list = format_for_1750(items)
 #for each item in items 
 #add to contents field while there is space
 #todo make new page if not space
-#add the data to the dict below which will print to the DD-1750
+#add the data to the object below which will print to the DD-1750
 ff = FillableFields()
 
-
-ff = add_inventory_to_FillableFields(items_list, ff)
 ff = add_other_fields(ff)
+
+add_success,ff = add_inventory_to_FillableFields(items_list, ff)
+if(add_success == False):
+    print("Warning: You have too many items. Reduce the amount of items to get them all on the same page. Program will continue but will not contain all items")
+
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 
