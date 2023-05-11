@@ -1,3 +1,12 @@
+'''
+FillableFields class
+Author: Noel Mrowiec
+Date: 08May2023 
+
+Class is a container for the fillable fields of the DD-1750 PDF. The class has accessor and mutator method to add all fields. The class will limit the number of lines to MAX-ITEMS. After the fields have been added, the ff_dict contains all the fields.
+'''
+
+
 class FillableFields(object):
     MAX_ITEMS = 18
     ff_dict = {}

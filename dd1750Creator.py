@@ -1,25 +1,17 @@
 '''
-1750 Creator
+DD-1750 Creator Main application
 author: Noel Mrowiec
+Date: 18April2023  
 
-Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spredsheet). 
-Requirements: place the included DD-1750 PDF in the same folder as program because it is unprotected 
-and specific field names are use by the program to fillout the PDF. Additionally, the 123 excel 
-spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items 
-and 'PRINT TO DD-1750'. The program will add the information from the excel sheet if the is a 'x' in 
-the 'PRINT TO DD-1750' column. The name as serial number of the selected items (items with the 'x') 
-will be added to the DD-1750 PDF. Additionally, if there are repeated items, meaning items with the 
-same common name, they will be combined on the PDF and the total number of that item will be shown in 
-the total's column. 
+Creates DD-1750 PDF (packing list) from 123 excel sheet (electronic inventory spreadsheet). 
+Requirements: place the included DD-1750 PDF in the same folder as program because it is unprotected, and specific field names are used by the program to fill out the PDF. Additionally, the 123 excel spreadsheet must have the following fields exactly as shown: 'COMMON NAME' and 'SERIAL' for the items and 'PRINT TO DD-1750'. If there is nothing listed in the ‘COMMON NAME’ header, the program will pull from the 'NSN DESCRIPTION'. The program will add the information from the excel sheet if the is a 'x' (lower case x) in the 'PRINT TO DD-1750' column. The name as serial number of the selected items (items with the 'x') will be added to the DD-1750 PDF. The program will automatically combine items with the same common name if there are repeated items. Items with the same name will be added and will be shown in the total's column. The program prompts the user to enter the other information not found in the 123 sheet.
+
 Current version limitations:
--Only use the 'simple sheet test.xlsx' because it includes the proper formating and the coulmn 
+-The program cannot work with excel sheet with special formatting to the line header line (which has ‘COMMON NAME’ listed).
 to select a print. 
--Currently, only placing the item name in the correct box with the item's serial numbers and total 
-count of each item functions as expected. 
--The user cannot name the output file. Currently, it is given the name DD-Form-1750-Packing-List filled.pdf
- and the source PDF filled-out.pdf must be in the same file as the program. 
+-Currently, a second page of the DD-1750 cannot be created if there are too many items. The user will be warned if the case occurs. 
+- If a items doesn’t have a serial number, N/A will be listed for each item.  
 
-- 18APR: Note: Common name cannot be blank, otherwise it will not be added to list  
 '''
 
 import logging
