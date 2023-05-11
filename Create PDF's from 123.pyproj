@@ -25,6 +25,7 @@
     <Compile Include="dd1750otherFields.py" />
     <Compile Include="fillablefields.py" />
     <Compile Include="dd1750Creator.py" />
+    <Compile Include="dd1750HelperFunctions.py" />
     <Compile Include="test_area.py" />
     <Compile Include="testDifferentPDF.py" />
     <Compile Include="test_dd1750Creator..py">
