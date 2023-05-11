@@ -60,7 +60,7 @@ items = items.fillna(value={'COMMON NAME' : items['NSN DESCRIPTION']}) #
 # puts all the items with the same 'common name' on the same line with the serial numbers
 items = combine_same_items(items)
 #todo change this naming 
-items = format_for_1750(items)
+items_list = format_for_1750(items)
 
 
 #for each item in items 
@@ -70,21 +70,7 @@ items = format_for_1750(items)
 ff = FillableFields()
 
 
-# Add the inventory items to a FillableFields object so that the items
-# are in the proper format to ouput to a PDF
-line_num = 1    #start at 1 b/c line num starts at 1
-for item in items:  
-    # Put total number of items on first line of the items
-    count = number_of_items(item) 
-    ff.add_total_field(count, line_num)
-
-    # split up the items so that the contents is split over multiple lines
-    # if necessary. Otherwise, all items will be on the first line with the 
-    # total count
-    item_split_list = char_limit_item(item)
-    for line in item_split_list:
-        ff.add_contents_field(line, line_num)
-        line_num += 1   #since contents is split over a line, increment line number
+ff = func(items_list, ff)
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 

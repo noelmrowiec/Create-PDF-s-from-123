@@ -175,6 +175,30 @@ def number_of_items(item):
 
     return 1
 
+def add_inventory_to_FillableFields(items_list, ff):
+    ''' returns: FillableFields object with the inventory items and totals
+
+        Adds the inventory items to a FillableFields object so that the items
+        are in the proper format to ouput to a PDF. Will split items with a lot of serial numbers over multiple lines if necessary.
+
+        items_list: list of inventory items
+        ff: empty FillableField object to return
+    '''
+    # 
+    line_num = 1    #start at 1 b/c line num starts at 1
+    for item in items_list:  
+        # Put total number of items on first line of the items
+        count = number_of_items(item) 
+        ff.add_total_field(count, line_num)
+
+        # split up the items so that the contents is split over multiple lines
+        # if necessary. Otherwise, all items will be on the first line with the 
+        # total count
+        item_split_list = char_limit_item(item)
+        for line in item_split_list:
+            ff.add_contents_field(line, line_num)
+            line_num += 1   #since contents is split over a line, increment line number
+    return ff
 
 def openPDFfile():
     '''returns: PdfReader object which is the 'DD-Form-1750-Packing-List editable.pdf' file.
@@ -201,18 +225,32 @@ def openPDFfile():
     return reader
 
 def writeToPDF(writer):
-    ''' Writes the data in the PdfWriter object to a output PDF.
+    ''' returns: filename PDF was written to 
+    Writes the data in the PdfWriter object to a output PDF. Adds pdf extention if necessary. 
 
     writer: Must be a PdfWriter object with pages added and updated with
             data for the DD-1750
     '''
-    # write "output" to pypdf-output.pdf # below from https://pypdf.readthedocs.io/
+    #following information from https://pypdf.readthedocs.io/
+
+    filename = input("Enter output filename:\n")
+
+    #add '.pdf' to filename if necessary
+    if(filename[-4:].lower() != '.pdf'):
+        filename += '.pdf'
+
     pdfWritten = False
     while not pdfWritten:
+        #if file is open, will throw PermissionError
         try:
-            with open("filled-out.pdf", "wb") as output_stream:
+            with open(filename, "wb") as output_stream:
                 writer.write(output_stream)
             pdfWritten = True
         except PermissionError:
             logging.warning("Output file was open")
             input("Error: unable to write to PDF because PDF open. Please close the output PDF\nPress enter when PDF is closed")
+        except:
+            logging.info("Invalid filename")
+            print("Error: invalid filename. Do not include invalid characters")
+
+    return filename
