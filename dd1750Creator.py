@@ -95,21 +95,7 @@ for item in items:
 # Save as new PDF
 # below from https://pypdf.readthedocs.io/
 
-pdfOpened = False
-pdfFilename  = "DD-Form-1750-Packing-List editable.pdf" 
-reader = PdfReader(pdfFilename)
 
-# try openning PDF to write data to
-while not pdfOpened:
-    # try opening the DD-1750 PDF using the default filename
-    try:
-        reader = PdfReader(pdfFilename)
-        pdfOpened = True
-    except FileNotFoundError: 
-        logging.error("Default filename for opening DD-1750 incorrect")
-        print("DD-1750 Form to output could not be found. Make sure the following PDF is in the same folder \"DD-Form-1750-Packing-List editable\"")
-        #default filename failed, so ask user for filename
-        pdfFilename = input("Enter the full filename to the editable DD-1750 PDF:\n")
 
 writer = PdfWriter()        #Use writer to write data
 

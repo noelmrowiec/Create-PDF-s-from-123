@@ -3,7 +3,7 @@ import sys
 logging.basicConfig(filename='dd1750CreatorLog.txt', level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
 try:
     #from fillablefields import FillableFields
-    #from pypdf import PdfReader, PdfWriter      
+    from pypdf import PdfReader, PdfWriter      
     import pandas as pd                #for read excel sheets
     import re                          #import for regex for file name checks
 except:
@@ -174,3 +174,28 @@ def number_of_items(item):
         return len(serial_nums)
 
     return 1
+
+
+def openPDFfile():
+    '''returns: PdfReader object which is the 'DD-Form-1750-Packing-List editable.pdf' file.
+    The DD-1750 must be included with the program. 
+
+    The function will attempt to open the DD-1750 with the default filename ('DD-Form-1750-Packing-List editable.pdf'), if an error is encountered, the function will prompt the user for a correct filename. 
+    '''
+    pdfOpened = False
+    pdfFilename  = "DD-Form-1750-Packing-List editable.pdf" 
+    reader = PdfReader(pdfFilename)
+
+    # try openning PDF to write data to
+    while not pdfOpened:
+        # try opening the DD-1750 PDF using the default filename
+        try:
+            reader = PdfReader(pdfFilename)
+            pdfOpened = True
+        except FileNotFoundError: 
+            logging.error("Default filename for opening DD-1750 incorrect")
+            print("DD-1750 Form to output could not be found. Make sure the following PDF is in the same folder \"DD-Form-1750-Packing-List editable\"")
+            #default filename failed, so ask user for filename
+            pdfFilename = input("Enter the full filename to the editable DD-1750 PDF:\n")
+
+    return reader
