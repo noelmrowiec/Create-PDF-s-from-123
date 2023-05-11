@@ -71,7 +71,7 @@ ff = FillableFields()
 
 
 ff = add_inventory_to_FillableFields(items_list, ff)
-ff = add_other_field(ff)
+ff = add_other_fields(ff)
 
 # todo ask  to output dd1750 or da-2062
 # todo translate the fields in the excel sheet to the 1750 or 2062 

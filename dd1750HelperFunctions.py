@@ -179,17 +179,19 @@ def add_inventory_to_FillableFields(items_list, ff):
     ''' returns: FillableFields object with the inventory items and totals
 
         Adds the inventory items to a FillableFields object so that the items
-        are in the proper format to ouput to a PDF. Will split items with a lot of serial numbers over multiple lines if necessary.
+        are in the proper format to ouput to a PDF. Will split items with a lot of serial numbers over multiple lines if necessary. Prompts user to enter box number for the items (will be applied to all items).
 
         items_list: list of inventory items
         ff: empty FillableField object to return
     '''
-    # 
+    box_num = input("Enter the box number for the items: ")
+
     line_num = 1    #start at 1 b/c line num starts at 1
     for item in items_list:  
-        # Put total number of items on first line of the items
+        # Put total number of items and box number on first line of the items
         count = number_of_items(item) 
         ff.add_total_field(count, line_num)
+        ff.add_box_field(box_num, line_num)
 
         # split up the items so that the contents is split over multiple lines
         # if necessary. Otherwise, all items will be on the first line with the 
