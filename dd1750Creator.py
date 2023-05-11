@@ -201,6 +201,7 @@ def number_of_items(item):
     return 1
     
 #print(intro) todo print 
+print("Welcome to 123 to DD-1750 creator \nBefore beginning, please make sure you have the 123 excel sheet and editable DD-1750 in the same file as the program. The DD-1750 should be bundled with the program. (Note: The DD-1750 cannot be the form from military website since those forms are secured and have different settings).")
 
 # prompt user for input excel sheet file name
 inventory = get_inventory()
@@ -251,43 +252,47 @@ for item in items:
 # todo get correct sum the columns and put total in total_#
 # todo prompt user for output filename
 
-# save as new PDF
 
+# Save as new PDF
 # below from https://pypdf.readthedocs.io/
 
 pdfOpened = False
-pdfFilename  = "DD-Form-1750-Packing-List editable.pdf" #todo change to real filename
-
+pdfFilename  = "DD-Form-1750-Packing-List editable.pdf" 
 reader = PdfReader(pdfFilename)
-#while not pdfOpened:
-#    # try opening the DD-1750 PDF using the default filename
-#    try:
-#        reader = PdfReader(pdfFilename)
-#        pdfOpened = True
-#    except FileNotFoundError: 
 
-#        logging.error("Default filename for opening DD-1750 incorrect")
-#        print("DD-1750 Form to output could not be found. Make sure the following PDF is in the same folder \"DD-Form-1750-Packing-List editable\"")
-#        #default filename failed, so ask user for filename
-#        pdfFilename = input("Enter the full filename to the editable DD-1750 PDF:\n")
+# try openning PDF to write data to
+while not pdfOpened:
+    # try opening the DD-1750 PDF using the default filename
+    try:
+        reader = PdfReader(pdfFilename)
+        pdfOpened = True
+    except FileNotFoundError: 
+        logging.error("Default filename for opening DD-1750 incorrect")
+        print("DD-1750 Form to output could not be found. Make sure the following PDF is in the same folder \"DD-Form-1750-Packing-List editable\"")
+        #default filename failed, so ask user for filename
+        pdfFilename = input("Enter the full filename to the editable DD-1750 PDF:\n")
 
-writer = PdfWriter()
-
+writer = PdfWriter()        #Use writer to write data
 
 #print(reader.get_form_text_fields(True))
 
-
-page = reader.pages[0]   # from https://pypdf.readthedocs.io/
-fields = reader.get_fields()     # from https://pypdf.readthedocs.io/
+page = reader.pages[0]              # Use the first page from the PDF which was read
+fields = reader.get_fields()        # fields are the fillable fields of the PDF 
 
 
 writer.add_page(page)   # from https://pypdf.readthedocs.io/
-writer.update_page_form_field_values(writer.pages[0], ff.ff_dict) # from https://pypdf.readthedocs.io/
+writer.update_page_form_field_values(writer.pages[0], ff.ff_dict) # writes the data from the FillableField class to the PDF to write
 
 
-#todo PermissionError when file open
 # write "output" to pypdf-output.pdf # below from https://pypdf.readthedocs.io/
-with open("filled-out.pdf", "wb") as output_stream:
-    writer.write(output_stream)
+pdfWritten = False
+while not pdfWritten:
+    try:
+        with open("filled-out.pdf", "wb") as output_stream:
+            writer.write(output_stream)
+        pdfWritten = True
+    except PermissionError:
+        logging.warning("Output file was open")
+        input("Error: unable to write to PDF because PDF open. Please close the output PDF\nPress enter when PDF is closed")
 
 print("DD-1750 successfully outputted") #todo better info needed
