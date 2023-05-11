@@ -1,9 +1,16 @@
+'''
+dd1750otherFields.py
+Author: Noel Mrowiec
+Date: 03May2023 
+
+Helper methods accessed by the main program to simplify the main program. Should only be called by the main application. Pypdf and pandas must be installed to used this file.
+'''
+
 import logging
 import sys
 logging.basicConfig(filename='dd1750CreatorLog.txt', level=logging.DEBUG, format='%(asctime)s -  %(levelname)s -  %(message)s')
 try:
-    #from fillablefields import FillableFields
-    from pypdf import PdfReader, PdfWriter      
+    from pypdf import PdfReader      
     import pandas as pd                #for read excel sheets
     import re                          #import for regex for file name checks
 except:
