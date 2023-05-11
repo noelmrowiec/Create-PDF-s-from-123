@@ -95,7 +95,7 @@ for item in items:
 # Save as new PDF
 # below from https://pypdf.readthedocs.io/
 
-
+reader = openPDFfile()
 
 writer = PdfWriter()        #Use writer to write data
 
@@ -109,15 +109,6 @@ writer.add_page(page)   # from https://pypdf.readthedocs.io/
 writer.update_page_form_field_values(writer.pages[0], ff.ff_dict) # writes the data from the FillableField class to the PDF to write
 
 
-# write "output" to pypdf-output.pdf # below from https://pypdf.readthedocs.io/
-pdfWritten = False
-while not pdfWritten:
-    try:
-        with open("filled-out.pdf", "wb") as output_stream:
-            writer.write(output_stream)
-        pdfWritten = True
-    except PermissionError:
-        logging.warning("Output file was open")
-        input("Error: unable to write to PDF because PDF open. Please close the output PDF\nPress enter when PDF is closed")
+writeToPDF(writer)
 
 print("DD-1750 successfully outputted") #todo better info needed

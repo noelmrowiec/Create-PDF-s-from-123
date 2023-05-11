@@ -199,3 +199,20 @@ def openPDFfile():
             pdfFilename = input("Enter the full filename to the editable DD-1750 PDF:\n")
 
     return reader
+
+def writeToPDF(writer):
+    ''' Writes the data in the PdfWriter object to a output PDF.
+
+    writer: Must be a PdfWriter object with pages added and updated with
+            data for the DD-1750
+    '''
+    # write "output" to pypdf-output.pdf # below from https://pypdf.readthedocs.io/
+    pdfWritten = False
+    while not pdfWritten:
+        try:
+            with open("filled-out.pdf", "wb") as output_stream:
+                writer.write(output_stream)
+            pdfWritten = True
+        except PermissionError:
+            logging.warning("Output file was open")
+            input("Error: unable to write to PDF because PDF open. Please close the output PDF\nPress enter when PDF is closed")
